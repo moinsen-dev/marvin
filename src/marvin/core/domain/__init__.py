@@ -1,1 +1,1 @@
-"""Domänenmodelle für Marvin."""
+"""Domain models for Marvin."""

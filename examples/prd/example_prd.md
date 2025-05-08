@@ -1,49 +1,49 @@
-# Beispiel-PRD: Aufgabenverwaltung
+# Example PRD: Task Management
 
 > Version 1.0 | 2025-05-08
 
-## 1. Übersicht
+## 1. Overview
 
-Eine einfache Aufgabenverwaltungsanwendung, die es Benutzern ermöglicht, ihre täglichen Aufgaben zu verfolgen und zu organisieren.
+A simple task management application that allows users to track and organize their daily tasks.
 
-## 2. Feature: Aufgaben erstellen
+## 2. Feature: Create Tasks
 
-Benutzer können neue Aufgaben erstellen, indem sie einen Titel, eine Beschreibung und ein optionales Fälligkeitsdatum angeben.
+Users can create new tasks by providing a title, description, and optional due date.
 
-- Aufgabentitel ist obligatorisch
-- Beschreibung ist optional
-- Fälligkeitsdatum ist optional
-- Priorität kann als Hoch, Mittel oder Niedrig festgelegt werden
+- Task title is mandatory
+- Description is optional
+- Due date is optional
+- Priority can be set as High, Medium, or Low
 
-## 3. Feature: Aufgaben anzeigen
+## 3. Feature: View Tasks
 
-Benutzer können alle ihre Aufgaben in einer Liste sehen, sortiert nach Erstellungsdatum oder Fälligkeitsdatum.
+Users can see all their tasks in a list, sorted by creation date or due date.
 
-- Standardmäßig nach Erstellungsdatum sortiert
-- Möglichkeit zur Sortierung nach Fälligkeitsdatum
-- Filterung nach Status (Erledigt/Nicht erledigt)
-- Filterung nach Priorität
+- Sorted by creation date by default
+- Option to sort by due date
+- Filtering by status (Completed/Not completed)
+- Filtering by priority
 
-## 4. Feature: Aufgaben bearbeiten
+## 4. Feature: Edit Tasks
 
-Benutzer können bestehende Aufgaben bearbeiten, um Details zu aktualisieren.
+Users can edit existing tasks to update details.
 
-- Alle Felder können geändert werden
-- Änderungsprotokoll speichern
-- Keine Möglichkeit, gelöschte Aufgaben wiederherzustellen
+- All fields can be modified
+- Save change history
+- No ability to restore deleted tasks
 
-## 5. Feature: Aufgaben als erledigt markieren
+## 5. Feature: Mark Tasks as Completed
 
-Benutzer können Aufgaben als erledigt markieren, um den Fortschritt zu verfolgen.
+Users can mark tasks as completed to track progress.
 
-- Einfaches Umschalten zwischen erledigt und nicht erledigt
-- Erledigte Aufgaben werden visuell anders dargestellt
-- Option zum Ausblenden erledigter Aufgaben
+- Simple toggle between completed and not completed
+- Completed tasks are visually displayed differently
+- Option to hide completed tasks
 
-## 6. Feature: Benachrichtigungen
+## 6. Feature: Notifications
 
-Benutzer erhalten Benachrichtigungen für anstehende oder überfällige Aufgaben.
+Users receive notifications for upcoming or overdue tasks.
 
-- Tägliche Zusammenfassung der anstehenden Aufgaben
-- Erinnerungen an fällige Aufgaben
-- Anpassbare Benachrichtigungseinstellungen
+- Daily summary of upcoming tasks
+- Reminders for due tasks
+- Customizable notification settings

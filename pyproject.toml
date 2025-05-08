@@ -1,38 +1,53 @@
-[tool.poetry]
+[project]
 name = "marvin"
 version = "0.1.0"
-description = "Ein intelligentes Tool zur Umwandlung von PRDs in strukturierte AI-Coding-Tasks"
-authors = ["Your Name <your.email@example.com>"]
+description = "An intelligent tool for converting PRDs into structured AI-Coding-Tasks"
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
 readme = "README.md"
-packages = [{include = "marvin", from = "src"}]
+requires-python = ">=3.11"
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi>=0.115.12",
+    "uvicorn>=0.34.2",
+    "typer>=0.15.3",
+    "pydantic>=2.11.4",
+    "lxml>=5.4.0",
+    "beautifulsoup4>=4.13.4",
+    "google-adk>=0.4.0",
+    "rich>=14.0.0",
+    "langchain>=0.3.25",
+    "PyYAML>=6.0.2",
+    "websockets>=15.0.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = "^0.110.0"
-uvicorn = "^0.27.0"
-typer = "^0.9.0"
-pydantic = "^2.6.0"
-lxml = "^5.1.0"
-beautifulsoup4 = "^4.12.0"
-google-adk = "^0.1.0"  # Placeholder für Google's ADK
-context7 = "^0.1.0"    # Placeholder für Context7
-rich = "^13.7.0"
-langchain = "^0.1.0"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.2",
+    "black>=24.2.0",
+    "isort>=5.13.2",
+    "mypy>=1.8.0",
+    "ruff>=0.2.2",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.4",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
-black = "^24.1.0"
-isort = "^5.13.0"
-mypy = "^1.8.0"
-ruff = "^0.2.0"
-pytest-cov = "^4.1.0"
-
-[tool.poetry.scripts]
+[project.scripts]
 marvin = "marvin.cli:app"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=68.2.0", "wheel>=0.42.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.black]
 line-length = 88

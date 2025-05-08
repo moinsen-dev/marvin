@@ -1,1 +1,1 @@
-"""Adapter für Marvin."""
+"""Adapters for Marvin."""

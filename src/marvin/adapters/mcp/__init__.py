@@ -1,1 +1,1 @@
-"""MCP-Adapter für Marvin."""
+"""MCP adapter for Marvin."""

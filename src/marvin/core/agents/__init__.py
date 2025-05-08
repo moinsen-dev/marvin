@@ -1,1 +1,1 @@
-"""Agenten für Marvin."""
+"""Agents for Marvin."""

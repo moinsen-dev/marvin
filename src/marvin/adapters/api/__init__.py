@@ -1,1 +1,1 @@
-"""API-Adapter für Marvin."""
+"""API adapter for Marvin."""

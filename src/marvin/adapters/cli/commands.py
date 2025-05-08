@@ -1,4 +1,4 @@
-"""CLI-Befehle für Marvin."""
+"""CLI commands for Marvin."""
 
 import asyncio
 import os
@@ -27,38 +27,38 @@ def analyze_prd_command(
     codebase_path: Optional[str] = None,
     output_dir: str = "./marvin-output",
 ) -> None:
-    """Analysiert ein PRD und generiert AI-Coding-Tasks.
+    """Analyzes a PRD and generates AI coding tasks.
     
     Args:
-        prd_path: Pfad zum PRD-Dokument
-        codebase_path: (Optional) Pfad zur bestehenden Codebase
-        output_dir: Ausgabeverzeichnis für die Tasks
+        prd_path: Path to the PRD document
+        codebase_path: (Optional) Path to the existing codebase
+        output_dir: Output directory for the tasks
     """
-    console.print(Panel(f"Marvin - Der intelligente Task-Generator", subtitle=f"v{__version__}"))
-    console.print("\n[bold]Analysiere PRD...[/bold]")
-    console.print(f"PRD-Pfad: {prd_path}")
+    console.print(Panel(f"Marvin - The Intelligent Task Generator", subtitle=f"v{__version__}"))
+    console.print("\n[bold]Analyzing PRD...[/bold]")
+    console.print(f"PRD Path: {prd_path}")
     
     if not os.path.exists(prd_path):
-        console.print(f"[bold red]Fehler:[/bold red] PRD-Datei nicht gefunden: {prd_path}")
+        console.print(f"[bold red]Error:[/bold red] PRD file not found: {prd_path}")
         return
     
     if codebase_path:
-        console.print(f"Codebase-Pfad: {codebase_path}")
+        console.print(f"Codebase Path: {codebase_path}")
         if not os.path.exists(codebase_path):
-            console.print(f"[bold red]Fehler:[/bold red] Codebase-Pfad nicht gefunden: {codebase_path}")
+            console.print(f"[bold red]Error:[/bold red] Codebase path not found: {codebase_path}")
             return
     
-    # Ausgabeverzeichnis erstellen
+    # Create output directory
     os.makedirs(output_dir, exist_ok=True)
-    console.print(f"Ausgabeverzeichnis: {output_dir}")
+    console.print(f"Output Directory: {output_dir}")
     
-    # Agenten erstellen
+    # Create agents
     document_analysis_agent = DocumentAnalysisAgent()
     codebase_analysis_agent = CodebaseAnalysisAgent()
     sequence_planner_agent = SequencePlannerAgent()
     template_generation_agent = TemplateGenerationAgent()
     
-    # Use Case erstellen
+    # Create use case
     use_case = GenerateTemplatesUseCase(
         document_analysis_agent,
         codebase_analysis_agent,
@@ -66,16 +66,16 @@ def analyze_prd_command(
         template_generation_agent,
     )
     
-    # Fortschrittsanzeige mit Spinner
+    # Progress display with spinner
     with Progress(
         SpinnerColumn(),
         TextColumn("[bold blue]{task.description}"),
         TimeElapsedColumn(),
         console=console,
     ) as progress:
-        task = progress.add_task("Analysiere PRD und generiere Templates...", total=None)
+        task = progress.add_task("Analyzing PRD and generating templates...", total=None)
         
-        # Asynchrone Ausführung in einem synchronen Kontext
+        # Asynchronous execution in a synchronous context
         try:
             workflow_id, template_paths = asyncio.run(
                 use_case.execute(
@@ -88,59 +88,59 @@ def analyze_prd_command(
             )
             progress.update(task, completed=True)
             
-            # Ergebnis anzeigen
-            console.print("\n[bold green]Analyse abgeschlossen![/bold green]")
-            console.print(f"Workflow-ID: {workflow_id}")
-            console.print(f"Generierte Templates: {len(template_paths)}")
+            # Show results
+            console.print("\n[bold green]Analysis completed![/bold green]")
+            console.print(f"Workflow ID: {workflow_id}")
+            console.print(f"Generated Templates: {len(template_paths)}")
             
             for i, path in enumerate(template_paths, 1):
                 rel_path = os.path.relpath(path, os.getcwd())
                 console.print(f"  {i}. [blue]{rel_path}[/blue]")
             
             console.print(
-                f"\nDu kannst diese Templates jetzt mit deinem bevorzugten AI-Coding-Assistenten verwenden."
+                f"\nYou can now use these templates with your preferred AI coding assistant."
             )
         
         except Exception as e:
             progress.update(task, completed=True)
-            console.print(f"\n[bold red]Fehler bei der Analyse:[/bold red] {str(e)}")
+            console.print(f"\n[bold red]Error during analysis:[/bold red] {str(e)}")
 
 
 def serve_api_command(host: str = "127.0.0.1", port: int = 8000) -> None:
-    """Startet den API-Server.
+    """Starts the API server.
     
     Args:
-        host: Host-Adresse
-        port: Port-Nummer
+        host: Host address
+        port: Port number
     """
-    console.print(Panel(f"Marvin API-Server", subtitle=f"v{__version__}"))
-    console.print(f"[bold]Starte API-Server auf {host}:{port}...[/bold]")
+    console.print(Panel(f"Marvin API Server", subtitle=f"v{__version__}"))
+    console.print(f"[bold]Starting API server on {host}:{port}...[/bold]")
     
     try:
         from marvin.adapters.api.server import start_server
         
         start_server(host=host, port=port)
     except ImportError:
-        console.print("[bold red]Fehler:[/bold red] API-Server-Modul nicht gefunden.")
+        console.print("[bold red]Error:[/bold red] API server module not found.")
     except Exception as e:
-        console.print(f"[bold red]Fehler beim Starten des API-Servers:[/bold red] {str(e)}")
+        console.print(f"[bold red]Error starting API server:[/bold red] {str(e)}")
 
 
 def serve_mcp_command(host: str = "127.0.0.1", port: int = 9000) -> None:
-    """Startet den MCP-Server.
+    """Starts the MCP server.
     
     Args:
-        host: Host-Adresse
-        port: Port-Nummer
+        host: Host address
+        port: Port number
     """
-    console.print(Panel(f"Marvin MCP-Server", subtitle=f"v{__version__}"))
-    console.print(f"[bold]Starte MCP-Server auf {host}:{port}...[/bold]")
+    console.print(Panel(f"Marvin MCP Server", subtitle=f"v{__version__}"))
+    console.print(f"[bold]Starting MCP server on {host}:{port}...[/bold]")
     
     try:
         from marvin.adapters.mcp.server import start_server
         
         start_server(host=host, port=port)
     except ImportError:
-        console.print("[bold red]Fehler:[/bold red] MCP-Server-Modul nicht gefunden.")
+        console.print("[bold red]Error:[/bold red] MCP server module not found.")
     except Exception as e:
-        console.print(f"[bold red]Fehler beim Starten des MCP-Servers:[/bold red] {str(e)}")
+        console.print(f"[bold red]Error starting MCP server:[/bold red] {str(e)}")

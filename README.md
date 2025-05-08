@@ -2,73 +2,78 @@
 
 > "Life? Don't talk to me about life." - Marvin, the Paranoid Android
 
-## Überblick
+## Overview
 
-Marvin ist ein intelligentes Tool, das Produktanforderungsdokumente (PRDs) analysiert und diese in strukturierte AI-Coding-Tasks umwandelt. Benannt nach dem depressiven Roboter aus "Per Anhalter durch die Galaxis" hilft Marvin Entwicklern, ihre Projekte effizienter zu organisieren und AI-Coding-Assistenten (wie Cursor, Windsurf oder Claude Code) optimal zu nutzen.
+Marvin is an intelligent tool that analyzes Product Requirement Documents (PRDs) and converts them into structured AI-Coding-Tasks. Named after the depressive robot from "The Hitchhiker's Guide to the Galaxy," Marvin helps developers organize their projects more efficiently and make optimal use of AI coding assistants (like Cursor, Windsurf, or Claude Code).
 
-## Funktionen
+## Features
 
-- **PRD-Analyse**: Extraktion von Features und Anforderungen aus Produktanforderungsdokumenten
-- **Codebase-Scanning**: Analyse bestehender Codebases zur Integration neuer Features
-- **Template-Generierung**: Erstellung strukturierter AI-Coding-Task-Templates im XML-Format
-- **Sequenzplanung**: Automatische Aufteilung von Anforderungen in logische, aufeinander aufbauende Aufgaben
+- **PRD Analysis**: Extraction of features and requirements from product requirement documents
+- **Codebase Scanning**: Analysis of existing codebases for new feature integration
+- **Template Generation**: Creation of structured AI-Coding-Task templates in XML format
+- **Sequence Planning**: Automatic division of requirements into logical, sequential tasks
 
 ## Interfaces
 
-Marvin bietet drei verschiedene Zugriffsmethoden:
+Marvin offers three different access methods:
 
-1. **CLI-Tool**: Für Entwickler, die Marvin direkt in ihrer lokalen Umgebung nutzen möchten
-2. **API**: Für die Integration in CI/CD-Pipelines und andere Tools
-3. **MCP-Server**: Für kollaborative Entwicklungsumgebungen und komplexe Anwendungsfälle
+1. **CLI Tool**: For developers who want to use Marvin directly in their local environment
+2. **API**: For integration into CI/CD pipelines and other tools
+3. **MCP Server**: For collaborative development environments and complex use cases
 
-## Technologie
+## Technology
 
 - Python 3.11+
 - FastAPI
 - Google ADK (Agent Development Kit)
-- Context 7 für Codeanalyse
-- Agenten-basierte Architektur
+- Context 7 for code analysis
+- Agent-based architecture
 
 ## Installation
 
 ```bash
-# Mit Poetry (empfohlen)
-poetry install
+# With uv (recommended)
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e .
 
-# Mit pip
+# For development
+uv pip install -r requirements-dev.txt
+
+# With pip
 pip install -e .
 ```
 
-## Schnellstart
+## Quick Start
 
 ```bash
-# Als CLI-Tool
+# As CLI tool
 marvin analyze --prd path/to/prd.md --output path/to/output
 
-# Als API-Server starten
+# Start as API server
 marvin serve-api
 
-# Als MCP-Server starten
+# Start as MCP server
 marvin serve-mcp
 ```
 
-## Projektstruktur
+## Project Structure
 
 ```
 /marvin
   /src
-    /core          # Domänenlogik
+    /core          # Domain logic
     /adapters      # Interfaces (CLI, API, MCP)
-    /infrastructure # Technische Implementierungen
+    /infrastructure # Technical implementations
   /tests
   /docs
   /examples
 ```
 
-## Lizenz
+## License
 
 MIT
 
-## Hinweis
+## Note
 
-*Don't Panic!* - Auch wenn Marvin manchmal depressiv sein mag, ist er immer hier, um zu helfen.
+*Don't Panic!* - Even though Marvin might be depressive at times, he's always here to help.

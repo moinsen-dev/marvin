@@ -1,4 +1,4 @@
-"""Tests für den DocumentAnalysisAgent."""
+"""Tests for the DocumentAnalysisAgent."""
 
 import os
 import sys
@@ -8,7 +8,7 @@ from datetime import datetime
 
 import pytest
 
-# Pfad zum src-Verzeichnis hinzufügen
+# Add path to src directory
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src")))
 
 from marvin.core.agents.document_analysis import DocumentAnalysisAgent
@@ -16,10 +16,10 @@ from marvin.core.domain.models import Feature, PRD
 
 
 class TestDocumentAnalysisAgent(unittest.TestCase):
-    """Testklasse für den DocumentAnalysisAgent."""
+    """Test class for the DocumentAnalysisAgent."""
     
     def setUp(self):
-        """Testumgebung einrichten."""
+        """Set up test environment."""
         self.agent = DocumentAnalysisAgent()
         self.test_md_path = os.path.abspath(
             os.path.join(os.path.dirname(__file__), "../../examples/prd/example_prd.md")
@@ -27,12 +27,12 @@ class TestDocumentAnalysisAgent(unittest.TestCase):
     
     @pytest.mark.asyncio
     async def test_analyze_markdown(self):
-        """Test für die Analyse eines Markdown-PRDs."""
-        # Nur testen, wenn die Testdatei existiert
+        """Test for analyzing a Markdown PRD."""
+        # Only test if the test file exists
         if not os.path.exists(self.test_md_path):
-            self.skipTest(f"Testdatei nicht gefunden: {self.test_md_path}")
+            self.skipTest(f"Test file not found: {self.test_md_path}")
         
-        # Test durchführen
+        # Perform test
         prd, features = await self.agent._analyze_markdown(
             self.test_md_path,
             created_at=datetime.now(),
@@ -43,18 +43,18 @@ class TestDocumentAnalysisAgent(unittest.TestCase):
         self.assertIsInstance(prd, PRD)
         self.assertIsInstance(features, list)
         self.assertTrue(all(isinstance(f, Feature) for f in features))
-        self.assertEqual(prd.title, "Beispiel-PRD: Aufgabenverwaltung")
+        self.assertEqual(prd.title, "Example PRD: Task Management")
         self.assertGreater(len(features), 0)
     
     @pytest.mark.asyncio
     async def test_execute_with_nonexistent_file(self):
-        """Test für die Ausführung mit nicht existierender Datei."""
+        """Test for execution with a non-existent file."""
         with self.assertRaises(FileNotFoundError):
             await self.agent.execute("nonexistent_file.md")
     
     @pytest.mark.asyncio
     async def test_execute_with_unsupported_format(self):
-        """Test für die Ausführung mit nicht unterstütztem Format."""
+        """Test for execution with an unsupported format."""
         mock_path = "test.xyz"
         with patch("os.path.exists", return_value=True):
             with self.assertRaises(ValueError):

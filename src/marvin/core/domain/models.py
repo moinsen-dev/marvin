@@ -1,4 +1,4 @@
-"""Domänenmodelle für Marvin."""
+"""Domain models for Marvin."""
 
 from datetime import datetime
 from enum import Enum
@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 
 
 class FeatureStatus(str, Enum):
-    """Status eines Features."""
+    """Status of a feature."""
     
     PROPOSED = "proposed"
     ACCEPTED = "accepted"
@@ -19,7 +19,7 @@ class FeatureStatus(str, Enum):
 
 
 class Feature(BaseModel):
-    """Ein Feature aus einem PRD."""
+    """A feature from a PRD."""
     
     id: str
     name: str
@@ -33,7 +33,7 @@ class Feature(BaseModel):
 
 
 class PRD(BaseModel):
-    """Ein Produktanforderungsdokument."""
+    """A Product Requirements Document."""
     
     id: str
     title: str
@@ -46,13 +46,13 @@ class PRD(BaseModel):
     tags: List[str] = Field(default_factory=list)
     
     def add_feature(self, feature: Feature) -> None:
-        """Fügt ein Feature zum PRD hinzu."""
+        """Adds a feature to the PRD."""
         self.features.append(feature)
         self.updated_at = datetime.now()
 
 
 class Component(BaseModel):
-    """Eine Komponente einer Codebase."""
+    """A component of a codebase."""
     
     name: str
     path: str
@@ -63,7 +63,7 @@ class Component(BaseModel):
 
 
 class Technology(BaseModel):
-    """Eine Technologie, die in einer Codebase verwendet wird."""
+    """A technology used in a codebase."""
     
     name: str
     version: Optional[str] = None
@@ -72,7 +72,7 @@ class Technology(BaseModel):
 
 
 class Codebase(BaseModel):
-    """Eine analysierte Codebase."""
+    """An analyzed codebase."""
     
     id: str
     name: str
@@ -83,12 +83,12 @@ class Codebase(BaseModel):
     architecture_patterns: List[str] = Field(default_factory=list)
     
     def add_component(self, component: Component) -> None:
-        """Fügt eine Komponente zur Codebase hinzu."""
+        """Adds a component to the codebase."""
         self.components.append(component)
 
 
 class TaskStatus(str, Enum):
-    """Status einer Task."""
+    """Status of a task."""
     
     PLANNED = "planned"
     IN_PROGRESS = "in_progress"
@@ -98,7 +98,7 @@ class TaskStatus(str, Enum):
 
 
 class Task(BaseModel):
-    """Eine AI-Coding-Task."""
+    """An AI coding task."""
     
     task_id: str
     sequence_number: int
@@ -113,12 +113,12 @@ class Task(BaseModel):
     
     @property
     def is_blocked(self) -> bool:
-        """Prüft, ob die Task blockiert ist."""
+        """Checks if the task is blocked."""
         return self.status == TaskStatus.BLOCKED
 
 
 class Workflow(BaseModel):
-    """Ein Workflow mit einer Sequenz von Tasks."""
+    """A workflow with a sequence of tasks."""
     
     id: str
     name: str
@@ -130,7 +130,7 @@ class Workflow(BaseModel):
     updated_at: datetime = Field(default_factory=datetime.now)
     
     def add_task(self, task: Task) -> None:
-        """Fügt eine Task zum Workflow hinzu."""
+        """Adds a task to the workflow."""
         self.tasks.append(task)
         self.tasks.sort(key=lambda x: x.sequence_number)
         self.updated_at = datetime.now()

@@ -1,4 +1,4 @@
-"""Agent zur Generierung von AI-Coding-Task-Templates."""
+"""Agent for generating AI coding task templates."""
 
 import os
 from datetime import datetime
@@ -11,14 +11,14 @@ from marvin.infrastructure.template_generator.xml_generator import XMLTemplateGe
 
 
 class TemplateGenerationAgent(Agent):
-    """Agent zur Generierung von XML-basierten AI-Coding-Task-Templates."""
+    """Agent for generating XML-based AI coding task templates."""
     
     def __init__(self, name: str = "template_generation", config: Optional[Dict[str, Any]] = None):
-        """Initialisiert den TemplateGenerationAgent.
+        """Initializes the TemplateGenerationAgent.
         
         Args:
-            name: Name des Agenten
-            config: Konfiguration des Agenten
+            name: Name of the agent
+            config: Configuration of the agent
         """
         super().__init__(name, config)
         self.template_generator = XMLTemplateGenerator()
@@ -32,42 +32,42 @@ class TemplateGenerationAgent(Agent):
         codebase: Optional[Codebase] = None,
         **kwargs: Any,
     ) -> str:
-        """Generiert ein XML-Template für eine AI-Coding-Task.
+        """Generates an XML template for an AI coding task.
         
         Args:
-            task: Die Task, für die das Template generiert werden soll
-            feature: Das Feature, zu dem die Task gehört
-            prd: Das PRD, zu dem das Feature gehört
-            output_dir: Ausgabeverzeichnis für das Template
-            codebase: (Optional) Die analysierte Codebase
-            **kwargs: Weitere Parameter
+            task: The task for which the template should be generated
+            feature: The feature to which the task belongs
+            prd: The PRD to which the feature belongs
+            output_dir: Output directory for the template
+            codebase: (Optional) The analyzed codebase
+            **kwargs: Additional parameters
             
         Returns:
-            Pfad zum generierten Template
+            Path to the generated template
             
         Raises:
-            IOError: Wenn das Template nicht gespeichert werden kann
+            IOError: If the template cannot be saved
         """
-        # Zusätzlichen Kontext für das Template erstellen
+        # Create additional context for the template
         additional_context = await self._prepare_additional_context(task, feature, prd, codebase, **kwargs)
         
-        # Template generieren
+        # Generate template
         template_content = self.template_generator.generate_task_template(
             task, feature, prd, codebase, additional_context
         )
         
-        # Prüfen, ob das Template valide ist
+        # Check if the template is valid
         is_valid, error = self.template_generator.validate_xml(template_content)
         if not is_valid:
-            raise ValueError(f"Generiertes Template ist ungültig: {error}")
+            raise ValueError(f"Generated template is invalid: {error}")
         
-        # Ausgabepfad erstellen
+        # Create output path
         os.makedirs(output_dir, exist_ok=True)
         output_path = os.path.join(
             output_dir, f"{task.sequence_number:02d}_{feature.id}_{task.task_id}.xml"
         )
         
-        # Template speichern
+        # Save template
         self.template_generator.save_to_file(template_content, output_path)
         
         return output_path
@@ -80,42 +80,42 @@ class TemplateGenerationAgent(Agent):
         codebase: Optional[Codebase],
         **kwargs: Any,
     ) -> Dict[str, Any]:
-        """Bereitet zusätzlichen Kontext für das Template vor.
+        """Prepares additional context for the template.
         
         Args:
-            task: Die Task, für die das Template generiert werden soll
-            feature: Das Feature, zu dem die Task gehört
-            prd: Das PRD, zu dem das Feature gehört
-            codebase: (Optional) Die analysierte Codebase
-            **kwargs: Weitere Parameter
+            task: The task for which the template should be generated
+            feature: The feature to which the task belongs
+            prd: The PRD to which the feature belongs
+            codebase: (Optional) The analyzed codebase
+            **kwargs: Additional parameters
             
         Returns:
-            Zusätzlicher Kontext für das Template
+            Additional context for the template
         """
-        # Hier würden wir Google ADK verwenden, um den Kontext zu verbessern
-        # Für jetzt implementieren wir eine einfache Kontexterstellung
+        # Here we would use Google ADK to improve the context
+        # For now, we implement a simple context creation
         
         context = {}
         
-        # Geschäftsdomäne aus dem PRD-Titel ableiten
+        # Derive business domain from PRD title
         business_domain = prd.title.split(":")[1].strip() if ":" in prd.title else prd.title
         context["business_domain"] = business_domain
         
-        # Annahmen hinzufügen
-        context["assumptions"] = f"Feature '{feature.name}' kann unabhängig implementiert werden."
+        # Add assumptions
+        context["assumptions"] = f"Feature '{feature.name}' can be implemented independently."
         
-        # Risiken hinzufügen
-        context["risks"] = f"Änderungen an {feature.name} können andere Komponenten beeinflussen."
-        context["risk_mitigation"] = "Umfangreiche Tests durchführen"
+        # Add risks
+        context["risks"] = f"Changes to {feature.name} may affect other components."
+        context["risk_mitigation"] = "Perform comprehensive tests"
         
-        # Betroffene Komponenten hinzufügen
+        # Add affected components
         if codebase:
             affected_files = []
             affected_folders = []
             
-            # In einer vollständigen Implementierung würden wir hier Context 7 verwenden
+            # In a complete implementation, we would use Context 7 here
             for component in codebase.components:
-                # Einfache Heuristik: Wenn der Komponentenname im Feature-Namen enthalten ist
+                # Simple heuristic: If the component name is contained in the feature name
                 if component.name.lower() in feature.name.lower():
                     if component.type == "file":
                         affected_files.append(component.path)
@@ -125,13 +125,13 @@ class TemplateGenerationAgent(Agent):
             context["affected_files"] = ", ".join(affected_files[:5])
             context["affected_folders"] = ", ".join(affected_folders[:3])
         
-        # Akzeptanzkriterien aus den Feature-Anforderungen ableiten
+        # Derive acceptance criteria from feature requirements
         if feature.requirements:
             context["acceptance_criteria"] = "\n".join(
                 f"- {req}" for req in feature.requirements
             )
         
-        # Erwarteten Zeitrahmen schätzen
-        context["expected_timeframe"] = "1-2 Tage"
+        # Estimate expected timeframe
+        context["expected_timeframe"] = "1-2 days"
         
         return context

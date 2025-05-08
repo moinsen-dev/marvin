@@ -1,1 +1,1 @@
-"""Template-Generator für Marvin."""
+"""Template generator for Marvin."""

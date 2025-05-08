@@ -1,60 +1,60 @@
-"""Basisklasse für Marvin-Agenten."""
+"""Base class for Marvin agents."""
 
 import abc
 from typing import Any, Dict, List, Optional
 
 
 class Agent(abc.ABC):
-    """Abstrakte Basisklasse für alle Marvin-Agenten."""
+    """Abstract base class for all Marvin agents."""
     
     def __init__(self, name: str, config: Optional[Dict[str, Any]] = None):
-        """Initialisiert einen Agenten.
+        """Initializes an agent.
         
         Args:
-            name: Name des Agenten
-            config: Konfiguration des Agenten
+            name: Name of the agent
+            config: Configuration of the agent
         """
         self.name = name
         self.config = config or {}
     
     @abc.abstractmethod
     async def execute(self, *args: Any, **kwargs: Any) -> Any:
-        """Führt die Hauptfunktion des Agenten aus.
+        """Executes the main function of the agent.
         
         Args:
-            *args: Argumente für die Ausführung
-            **kwargs: Keyword-Argumente für die Ausführung
+            *args: Arguments for execution
+            **kwargs: Keyword arguments for execution
             
         Returns:
-            Das Ergebnis der Ausführung
+            The result of the execution
         """
-        raise NotImplementedError("Subklassen müssen execute() implementieren")
+        raise NotImplementedError("Subclasses must implement execute()")
     
     def get_config(self, key: str, default: Any = None) -> Any:
-        """Gibt einen Konfigurationswert zurück.
+        """Returns a configuration value.
         
         Args:
-            key: Schlüssel des Konfigurationswerts
-            default: Standardwert, falls der Schlüssel nicht existiert
+            key: Key of the configuration value
+            default: Default value if the key does not exist
             
         Returns:
-            Der Konfigurationswert oder der Standardwert
+            The configuration value or the default value
         """
         return self.config.get(key, default)
     
     def set_config(self, key: str, value: Any) -> None:
-        """Setzt einen Konfigurationswert.
+        """Sets a configuration value.
         
         Args:
-            key: Schlüssel des Konfigurationswerts
-            value: Wert des Konfigurationswerts
+            key: Key of the configuration value
+            value: Value of the configuration value
         """
         self.config[key] = value
     
     def __str__(self) -> str:
-        """String-Repräsentation des Agenten.
+        """String representation of the agent.
         
         Returns:
-            String-Repräsentation
+            String representation
         """
         return f"{self.__class__.__name__}(name={self.name})"

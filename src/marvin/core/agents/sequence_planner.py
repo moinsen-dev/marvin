@@ -1,4 +1,4 @@
-"""Agent zur Planung von Aufgabensequenzen."""
+"""Agent for planning task sequences."""
 
 import itertools
 from datetime import datetime
@@ -9,37 +9,37 @@ from marvin.core.domain.models import Codebase, Feature, PRD, Task, TaskStatus, 
 
 
 class DependencyGraph:
-    """Graph zur Darstellung von Abhängigkeiten zwischen Aufgaben."""
+    """Graph for representing dependencies between tasks."""
     
     def __init__(self):
-        """Initialisiert einen neuen Abhängigkeitsgraphen."""
-        self.nodes: Dict[str, Set[str]] = {}  # Feature-ID -> abhängige Features
+        """Initializes a new dependency graph."""
+        self.nodes: Dict[str, Set[str]] = {}  # Feature ID -> dependent features
     
     def add_node(self, feature_id: str) -> None:
-        """Fügt einen Knoten zum Graphen hinzu.
+        """Adds a node to the graph.
         
         Args:
-            feature_id: ID des Features
+            feature_id: ID of the feature
         """
         if feature_id not in self.nodes:
             self.nodes[feature_id] = set()
     
     def add_edge(self, from_id: str, to_id: str) -> None:
-        """Fügt eine Kante zum Graphen hinzu (from_id hängt von to_id ab).
+        """Adds an edge to the graph (from_id depends on to_id).
         
         Args:
-            from_id: ID des abhängigen Features
-            to_id: ID des Features, von dem abhängig ist
+            from_id: ID of the dependent feature
+            to_id: ID of the feature that is depended on
         """
         self.add_node(from_id)
         self.add_node(to_id)
         self.nodes[from_id].add(to_id)
     
     def has_cycle(self) -> bool:
-        """Prüft, ob der Graph Zyklen enthält.
+        """Checks if the graph contains cycles.
         
         Returns:
-            True, wenn Zyklen vorhanden sind, sonst False
+            True if cycles are present, False otherwise
         """
         visited = set()
         rec_stack = set()
@@ -66,16 +66,16 @@ class DependencyGraph:
         return False
     
     def topological_sort(self) -> List[str]:
-        """Führt eine topologische Sortierung des Graphen durch.
+        """Performs a topological sort of the graph.
         
         Returns:
-            Liste der Feature-IDs in topologischer Reihenfolge
+            List of feature IDs in topological order
             
         Raises:
-            ValueError: Wenn der Graph Zyklen enthält
+            ValueError: If the graph contains cycles
         """
         if self.has_cycle():
-            raise ValueError("Graph enthält Zyklen und kann nicht topologisch sortiert werden")
+            raise ValueError("Graph contains cycles and cannot be topologically sorted")
         
         visited = set()
         result = []
@@ -97,70 +97,70 @@ class DependencyGraph:
 
 
 class SequencePlannerAgent(Agent):
-    """Agent zur Planung von Aufgabensequenzen basierend auf Feature-Abhängigkeiten."""
+    """Agent for planning task sequences based on feature dependencies."""
     
     def __init__(self, name: str = "sequence_planner", config: Optional[Dict[str, Any]] = None):
-        """Initialisiert den SequencePlannerAgent.
+        """Initializes the SequencePlannerAgent.
         
         Args:
-            name: Name des Agenten
-            config: Konfiguration des Agenten
+            name: Name of the agent
+            config: Configuration of the agent
         """
         super().__init__(name, config)
     
     async def execute(
         self, prd: PRD, codebase: Optional[Codebase] = None, **kwargs: Any
     ) -> Workflow:
-        """Plant eine Sequenz von Aufgaben basierend auf Feature-Abhängigkeiten.
+        """Plans a sequence of tasks based on feature dependencies.
         
         Args:
-            prd: Das PRD mit den Features
-            codebase: (Optional) Die analysierte Codebase
-            **kwargs: Weitere Parameter
+            prd: The PRD with the features
+            codebase: (Optional) The analyzed codebase
+            **kwargs: Additional parameters
             
         Returns:
-            Workflow mit geplanten Aufgaben
+            Workflow with planned tasks
         """
-        # Abhängigkeitsgraphen erstellen
+        # Create dependency graph
         dependency_graph = await self._build_dependency_graph(prd.features)
         
-        # Topologische Sortierung durchführen
+        # Perform topological sort
         try:
             feature_sequence = dependency_graph.topological_sort()
         except ValueError:
-            # Bei Zyklen eine andere Strategie anwenden
+            # Apply a different strategy for cycles
             feature_sequence = await self._resolve_cyclic_dependencies(prd.features, dependency_graph)
         
-        # Workflow erstellen
+        # Create workflow
         workflow = Workflow(
             id=f"workflow_{prd.id}",
-            name=f"Workflow für {prd.title}",
-            description=f"Automatisch generierter Workflow für {prd.title}",
+            name=f"Workflow for {prd.title}",
+            description=f"Automatically generated workflow for {prd.title}",
             prd_id=prd.id,
             codebase_id=codebase.id if codebase else None,
             created_at=datetime.now(),
             updated_at=datetime.now(),
         )
         
-        # Aufgaben für jedes Feature erstellen
+        # Create tasks for each feature
         sequence_number = 1
         for feature_id in feature_sequence:
             feature = next((f for f in prd.features if f.id == feature_id), None)
             if not feature:
                 continue
             
-            # Abhängigkeiten für die Task ermitteln
+            # Determine dependencies for the task
             depends_on = []
             for dep_id in feature.dependencies:
                 dep_feature = next((f for f in prd.features if f.id == dep_id), None)
                 if dep_feature:
                     depends_on.append(f"task_{dep_feature.id}")
             
-            # Task erstellen
+            # Create task
             task = Task(
                 task_id=f"task_{feature.id}",
                 sequence_number=sequence_number,
-                name=f"Implementiere {feature.name}",
+                name=f"Implement {feature.name}",
                 description=feature.description,
                 feature_id=feature.id,
                 depends_on=depends_on,
@@ -175,21 +175,21 @@ class SequencePlannerAgent(Agent):
         return workflow
     
     async def _build_dependency_graph(self, features: List[Feature]) -> DependencyGraph:
-        """Erstellt einen Abhängigkeitsgraphen aus Features.
+        """Creates a dependency graph from features.
         
         Args:
-            features: Liste der Features
+            features: List of features
             
         Returns:
-            Abhängigkeitsgraph
+            Dependency graph
         """
         graph = DependencyGraph()
         
-        # Knoten für alle Features hinzufügen
+        # Add nodes for all features
         for feature in features:
             graph.add_node(feature.id)
         
-        # Kanten für Abhängigkeiten hinzufügen
+        # Add edges for dependencies
         for feature in features:
             for dep_id in feature.dependencies:
                 graph.add_edge(feature.id, dep_id)
@@ -199,32 +199,32 @@ class SequencePlannerAgent(Agent):
     async def _resolve_cyclic_dependencies(
         self, features: List[Feature], graph: DependencyGraph
     ) -> List[str]:
-        """Löst zyklische Abhängigkeiten auf, indem die am wenigsten störenden Kanten entfernt werden.
+        """Resolves cyclic dependencies by removing the least disruptive edges.
         
         Args:
-            features: Liste der Features
-            graph: Abhängigkeitsgraph mit Zyklen
+            features: List of features
+            graph: Dependency graph with cycles
             
         Returns:
-            Sequenz von Feature-IDs
+            Sequence of feature IDs
         """
-        # Tiefe Kopie des Graphen erstellen
+        # Create a deep copy of the graph
         import copy
         working_graph = copy.deepcopy(graph)
         
-        # Prioritäten der Features berücksichtigen
+        # Consider feature priorities
         feature_priorities = {f.id: f.priority for f in features}
         
-        # Kanten entfernen, bis keine Zyklen mehr vorhanden sind
+        # Remove edges until no cycles remain
         removed_edges = []
         while working_graph.has_cycle():
-            # Kante mit niedrigster Priorität finden
+            # Find edge with lowest priority
             min_priority = float("inf")
             edge_to_remove = None
             
             for from_id, to_ids in working_graph.nodes.items():
                 for to_id in to_ids:
-                    # Priorität der Kante berechnen
+                    # Calculate edge priority
                     edge_priority = feature_priorities.get(from_id, 0) + feature_priorities.get(to_id, 0)
                     if edge_priority < min_priority:
                         min_priority = edge_priority
@@ -235,10 +235,10 @@ class SequencePlannerAgent(Agent):
                 working_graph.nodes[from_id].remove(to_id)
                 removed_edges.append(edge_to_remove)
             else:
-                # Keine Kanten mehr zum Entfernen
+                # No more edges to remove
                 break
         
-        # Topologische Sortierung des bereinigten Graphen
+        # Topological sort of the cleaned graph
         feature_sequence = working_graph.topological_sort()
         
         return feature_sequence

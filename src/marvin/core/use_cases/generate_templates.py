@@ -1,4 +1,4 @@
-"""Use Case: Generierung von AI-Coding-Task-Templates aus einem PRD."""
+"""Use Case: Generation of AI coding task templates from a PRD."""
 
 import os
 from datetime import datetime
@@ -13,7 +13,7 @@ from marvin.core.domain.models import Codebase, Feature, PRD, Task, Workflow
 
 
 class GenerateTemplatesUseCase:
-    """Use Case: Generierung von AI-Coding-Task-Templates aus einem PRD."""
+    """Use Case: Generation of AI coding task templates from a PRD."""
     
     def __init__(
         self,
@@ -22,13 +22,13 @@ class GenerateTemplatesUseCase:
         sequence_planner_agent: Optional[SequencePlannerAgent] = None,
         template_generation_agent: Optional[TemplateGenerationAgent] = None,
     ):
-        """Initialisiert den GenerateTemplatesUseCase.
+        """Initializes the GenerateTemplatesUseCase.
         
         Args:
-            document_analysis_agent: Agent zur Analyse von PRDs
-            codebase_analysis_agent: (Optional) Agent zur Analyse von Codebases
-            sequence_planner_agent: (Optional) Agent zur Planung von Aufgabensequenzen
-            template_generation_agent: (Optional) Agent zur Generierung von Templates
+            document_analysis_agent: Agent for analyzing PRDs
+            codebase_analysis_agent: (Optional) Agent for analyzing codebases
+            sequence_planner_agent: (Optional) Agent for planning task sequences
+            template_generation_agent: (Optional) Agent for generating templates
         """
         self.document_analysis_agent = document_analysis_agent
         self.codebase_analysis_agent = codebase_analysis_agent or CodebaseAnalysisAgent()
@@ -42,39 +42,39 @@ class GenerateTemplatesUseCase:
         codebase_path: Optional[str] = None,
         **kwargs: Any,
     ) -> Tuple[str, List[str]]:
-        """Führt den Use Case aus.
+        """Executes the use case.
         
         Args:
-            prd_path: Pfad zum PRD-Dokument
-            output_dir: Ausgabeverzeichnis für die Templates
-            codebase_path: (Optional) Pfad zur Codebase
-            **kwargs: Weitere Parameter
+            prd_path: Path to the PRD document
+            output_dir: Output directory for the templates
+            codebase_path: (Optional) Path to the codebase
+            **kwargs: Additional parameters
             
         Returns:
-            Tupel aus Workflow-ID und Liste der Pfade zu den generierten Templates
+            Tuple of workflow ID and list of paths to the generated templates
             
         Raises:
-            FileNotFoundError: Wenn das PRD oder die Codebase nicht gefunden wurde
-            ValueError: Wenn das PRD kein unterstütztes Format hat
+            FileNotFoundError: If the PRD or codebase was not found
+            ValueError: If the PRD does not have a supported format
         """
-        # 1. PRD analysieren
+        # 1. Analyze PRD
         prd, features = await self.document_analysis_agent.execute(
             prd_path, **kwargs
         )
         
-        # 2. Codebase analysieren (falls vorhanden)
+        # 2. Analyze codebase (if present)
         codebase = None
         if codebase_path:
             codebase = await self.codebase_analysis_agent.execute(
                 codebase_path, name=prd.title, **kwargs
             )
         
-        # 3. Aufgabensequenz planen
+        # 3. Plan task sequence
         workflow = await self.sequence_planner_agent.execute(
             prd, codebase, **kwargs
         )
         
-        # 4. Templates für jede Aufgabe generieren
+        # 4. Generate templates for each task
         template_paths = []
         for task in workflow.tasks:
             feature = next((f for f in features if f.id == task.feature_id), None)
@@ -86,7 +86,7 @@ class GenerateTemplatesUseCase:
             )
             template_paths.append(template_path)
             
-            # Task mit Template-Pfad aktualisieren
+            # Update task with template path
             task.template_path = template_path
         
         return workflow.id, template_paths

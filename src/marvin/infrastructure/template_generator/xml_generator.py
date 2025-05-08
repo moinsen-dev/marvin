@@ -1,4 +1,4 @@
-"""Generator für XML-basierte AI-Coding-Tasks."""
+"""Generator for XML-based AI coding tasks."""
 
 import os
 from datetime import datetime
@@ -11,24 +11,24 @@ from marvin.core.domain.models import Codebase, Feature, PRD, Task
 
 
 class XMLTemplateGenerator:
-    """Generator für XML-basierte AI-Coding-Tasks."""
+    """Generator for XML-based AI coding tasks."""
     
     def __init__(self, template_path: Optional[str] = None):
-        """Initialisiert den XMLTemplateGenerator.
+        """Initializes the XMLTemplateGenerator.
         
         Args:
-            template_path: Pfad zur Template-XML-Datei. Wenn None, wird das Standard-Template verwendet.
+            template_path: Path to the template XML file. If None, the default template is used.
         """
         self.template_path = template_path
         self._load_template()
     
     def _load_template(self) -> None:
-        """Lädt das XML-Template."""
+        """Loads the XML template."""
         if self.template_path and os.path.exists(self.template_path):
             with open(self.template_path, "r", encoding="utf-8") as f:
                 self.template_content = f.read()
         else:
-            # Standard-Template verwenden
+            # Use default template
             self.template_content = """<?xml version="1.0" encoding="UTF-8"?>
 <CodingTask>
   <SequenceInfo>
@@ -179,21 +179,21 @@ class XMLTemplateGenerator:
         codebase: Optional[Codebase] = None,
         additional_context: Optional[Dict[str, Any]] = None,
     ) -> str:
-        """Generiert ein XML-Template für eine AI-Coding-Task.
+        """Generates an XML template for an AI coding task.
         
         Args:
-            task: Die Task, für die das Template generiert werden soll
-            feature: Das Feature, zu dem die Task gehört
-            prd: Das PRD, zu dem das Feature gehört
-            codebase: (Optional) Die analysierte Codebase
-            additional_context: (Optional) Zusätzlicher Kontext für das Template
+            task: The task for which the template should be generated
+            feature: The feature to which the task belongs
+            prd: The PRD to which the feature belongs
+            codebase: (Optional) The analyzed codebase
+            additional_context: (Optional) Additional context for the template
             
         Returns:
-            Das generierte XML-Template als String
+            The generated XML template as a string
         """
         context = additional_context or {}
         
-        # Grundlegende Task-Informationen
+        # Basic task information
         context.update({
             "task_id": task.task_id,
             "sequence_number": task.sequence_number,
@@ -206,14 +206,14 @@ class XMLTemplateGenerator:
             "project_description": prd.description,
         })
         
-        # Feature-Informationen
+        # Feature information
         context.update({
             "purpose": feature.description,
             "functional_requirements": "\n".join(feature.requirements),
             "user_stories": self._generate_user_stories(feature),
         })
         
-        # Codebase-Informationen, falls verfügbar
+        # Codebase information, if available
         if codebase:
             context.update({
                 "languages": self._generate_languages(codebase),
@@ -221,22 +221,22 @@ class XMLTemplateGenerator:
                 "architecture_pattern": ", ".join(codebase.architecture_patterns),
             })
         
-        # Fehlende Felder mit Platzhaltern füllen
+        # Fill missing fields with placeholders
         self._fill_missing_placeholders(context)
         
-        # Template rendern
+        # Render template
         return self.template_content.format(**context)
     
     def _generate_user_stories(self, feature: Feature) -> str:
-        """Generiert XML für User Stories aus einem Feature.
+        """Generates XML for user stories from a feature.
         
         Args:
-            feature: Das Feature
+            feature: The feature
             
         Returns:
-            XML-String für User Stories
+            XML string for user stories
         """
-        # Einfaches Beispiel: Eine Story pro Feature
+        # Simple example: One story per feature
         return f"""<Story id="{feature.id}_story_01" 
                 role="User" 
                 goal="to be able to {feature.name}" 
@@ -244,13 +244,13 @@ class XMLTemplateGenerator:
                 acceptanceCriteria="{'; '.join(feature.requirements[:3]) if feature.requirements else 'TBD'}"/>"""
     
     def _generate_languages(self, codebase: Codebase) -> str:
-        """Generiert XML für Programmiersprachen.
+        """Generates XML for programming languages.
         
         Args:
-            codebase: Die analysierte Codebase
+            codebase: The analyzed codebase
             
         Returns:
-            XML-String für Programmiersprachen
+            XML string for programming languages
         """
         languages = [
             tech for tech in codebase.technologies if tech.category == "language"
@@ -266,13 +266,13 @@ class XMLTemplateGenerator:
         return result.strip()
     
     def _generate_frameworks(self, codebase: Codebase) -> str:
-        """Generiert XML für Frameworks.
+        """Generates XML for frameworks.
         
         Args:
-            codebase: Die analysierte Codebase
+            codebase: The analyzed codebase
             
         Returns:
-            XML-String für Frameworks
+            XML string for frameworks
         """
         frameworks = [
             tech for tech in codebase.technologies if tech.category == "framework"
@@ -288,44 +288,44 @@ class XMLTemplateGenerator:
         return result.strip()
     
     def _fill_missing_placeholders(self, context: Dict[str, Any]) -> None:
-        """Füllt fehlende Platzhalter im Template mit Standardwerten.
+        """Fills missing placeholders in the template with default values.
         
         Args:
-            context: Der Kontext für die Template-Generierung
+            context: The context for template generation
         """
-        # Alle Platzhalter aus dem Template extrahieren
+        # Extract all placeholders from the template
         import re
         placeholders = re.findall(r"{([^{}]+)}", self.template_content)
         
-        # Fehlende Platzhalter mit Standardwerten füllen
+        # Fill missing placeholders with default values
         for placeholder in placeholders:
             if placeholder not in context:
                 context[placeholder] = ""
     
     def save_to_file(self, content: str, output_path: str) -> None:
-        """Speichert den generierten Inhalt in einer Datei.
+        """Saves the generated content to a file.
         
         Args:
-            content: Der zu speichernde Inhalt
-            output_path: Der Pfad zur Ausgabedatei
+            content: The content to save
+            output_path: The path to the output file
             
         Raises:
-            IOError: Wenn die Datei nicht gespeichert werden kann
+            IOError: If the file cannot be saved
         """
-        # Verzeichnis erstellen, falls es nicht existiert
+        # Create directory if it doesn't exist
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(content)
     
     def validate_xml(self, xml_content: str) -> Tuple[bool, Optional[str]]:
-        """Validiert ein XML-Dokument.
+        """Validates an XML document.
         
         Args:
-            xml_content: Der XML-Inhalt
+            xml_content: The XML content
             
         Returns:
-            Tupel aus Validierungsstatus (True/False) und Fehlermeldung (None, wenn valide)
+            Tuple of validation status (True/False) and error message (None if valid)
         """
         try:
             parser = etree.XMLParser(dtd_validation=False)

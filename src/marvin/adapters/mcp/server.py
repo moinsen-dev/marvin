@@ -1,4 +1,4 @@
-"""MCP-Server für Marvin."""
+"""MCP server for Marvin."""
 
 import asyncio
 import json
@@ -12,7 +12,7 @@ from websockets.server import WebSocketServerProtocol
 
 from marvin import __version__
 
-# Logger einrichten
+# Set up logger
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -21,13 +21,13 @@ logger = logging.getLogger("marvin.mcp")
 
 
 class MCPServer:
-    """MCP-Server für Marvin - ermöglicht kollaboratives Arbeiten an AI-Coding-Tasks."""
+    """MCP server for Marvin - enables collaborative work on AI coding tasks."""
     
     def __init__(self, host: str = "127.0.0.1", port: int = 9000):
-        """Initialisiert den MCP-Server.
+        """Initializes the MCP server.
         
         Args:
-            host: Host-Adresse
+            host: Host address
             port: Port
         """
         self.host = host
@@ -37,42 +37,42 @@ class MCPServer:
         self.tasks: Dict[str, Dict[str, Any]] = {}
     
     async def register(self, websocket: WebSocketServerProtocol) -> None:
-        """Registriert einen neuen Client.
+        """Registers a new client.
         
         Args:
-            websocket: WebSocket-Verbindung des Clients
+            websocket: WebSocket connection of the client
         """
         self.clients.add(websocket)
-        logger.info(f"Client registriert: {websocket.remote_address}")
+        logger.info(f"Client registered: {websocket.remote_address}")
         await self.notify_clients(
             {
                 "type": "info",
-                "message": f"Neuer Client verbunden: {websocket.remote_address}",
+                "message": f"New client connected: {websocket.remote_address}",
                 "clients_count": len(self.clients),
             }
         )
     
     async def unregister(self, websocket: WebSocketServerProtocol) -> None:
-        """Entfernt einen Client.
+        """Removes a client.
         
         Args:
-            websocket: WebSocket-Verbindung des Clients
+            websocket: WebSocket connection of the client
         """
         self.clients.remove(websocket)
-        logger.info(f"Client getrennt: {websocket.remote_address}")
+        logger.info(f"Client disconnected: {websocket.remote_address}")
         await self.notify_clients(
             {
                 "type": "info",
-                "message": f"Client getrennt: {websocket.remote_address}",
+                "message": f"Client disconnected: {websocket.remote_address}",
                 "clients_count": len(self.clients),
             }
         )
     
     async def notify_clients(self, message: Dict[str, Any]) -> None:
-        """Sendet eine Nachricht an alle verbundenen Clients.
+        """Sends a message to all connected clients.
         
         Args:
-            message: Die zu sendende Nachricht
+            message: The message to send
         """
         if not self.clients:
             return
@@ -85,11 +85,11 @@ class MCPServer:
     async def process_message(
         self, websocket: WebSocketServerProtocol, message: Dict[str, Any]
     ) -> None:
-        """Verarbeitet eine Nachricht von einem Client.
+        """Processes a message from a client.
         
         Args:
-            websocket: WebSocket-Verbindung des Clients
-            message: Die empfangene Nachricht
+            websocket: WebSocket connection of the client
+            message: The received message
         """
         message_type = message.get("type", "unknown")
         
@@ -209,7 +209,7 @@ class MCPServer:
             )
         
         else:
-            logger.warning(f"Unbekannter Nachrichtentyp: {message_type}")
+            logger.warning(f"Unknown message type: {message_type}")
             await websocket.send(
                 json.dumps(
                     {
@@ -220,10 +220,10 @@ class MCPServer:
             )
     
     async def handler(self, websocket: WebSocketServerProtocol) -> None:
-        """Haupthandler für WebSocket-Verbindungen.
+        """Main handler for WebSocket connections.
         
         Args:
-            websocket: WebSocket-Verbindung des Clients
+            websocket: WebSocket connection of the client
         """
         await self.register(websocket)
         
@@ -233,7 +233,7 @@ class MCPServer:
                     data = json.loads(message)
                     await self.process_message(websocket, data)
                 except json.JSONDecodeError:
-                    logger.error(f"Ungültige JSON-Nachricht: {message}")
+                    logger.error(f"Invalid JSON message: {message}")
                     await websocket.send(
                         json.dumps(
                             {
@@ -243,28 +243,28 @@ class MCPServer:
                         )
                     )
         except websockets.exceptions.ConnectionClosed:
-            logger.info(f"Verbindung geschlossen: {websocket.remote_address}")
+            logger.info(f"Connection closed: {websocket.remote_address}")
         finally:
             await self.unregister(websocket)
     
     async def start(self) -> None:
-        """Startet den MCP-Server."""
-        logger.info(f"MCP-Server startet auf {self.host}:{self.port}")
+        """Starts the MCP server."""
+        logger.info(f"MCP server starting on {self.host}:{self.port}")
         
-        # Server-Info ausgeben
-        logger.info(f"Marvin MCP-Server v{__version__}")
+        # Output server info
+        logger.info(f"Marvin MCP Server v{__version__}")
         
-        # WebSocket-Server starten
+        # Start WebSocket server
         async with websockets.serve(self.handler, self.host, self.port):
-            # Server läuft, bis er beendet wird
-            await asyncio.Future()  # Läuft für immer
+            # Server runs until it is stopped
+            await asyncio.Future()  # Runs forever
 
 
 def start_server(host: str = "127.0.0.1", port: int = 9000) -> None:
-    """Startet den MCP-Server.
+    """Starts the MCP server.
     
     Args:
-        host: Host-Adresse
+        host: Host address
         port: Port
     """
     server = MCPServer(host, port)

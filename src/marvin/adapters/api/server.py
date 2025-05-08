@@ -1,4 +1,4 @@
-"""FastAPI-Server für Marvin."""
+"""FastAPI server for Marvin."""
 
 import os
 from datetime import datetime
@@ -12,22 +12,22 @@ from marvin import __version__
 
 app = FastAPI(
     title="Marvin API",
-    description="API für Marvin, den intelligenten Task-Generator für AI-Coding-Assistenten",
+    description="API for Marvin, the intelligent task generator for AI coding assistants",
     version=__version__,
 )
 
-# CORS-Middleware hinzufügen
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In Produktion einschränken
+    allow_origins=["*"],  # Restrict in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Datenmodelle für die API
+# Data models for the API
 class AnalyzeRequest(BaseModel):
-    """Anfrage zur Analyse eines PRDs."""
+    """Request to analyze a PRD."""
     
     prd_url: Optional[str] = None
     codebase_url: Optional[str] = None
@@ -35,7 +35,7 @@ class AnalyzeRequest(BaseModel):
 
 
 class AnalyzeResponse(BaseModel):
-    """Antwort auf eine Analyseanfrage."""
+    """Response to an analyze request."""
     
     job_id: str
     status: str
@@ -44,7 +44,7 @@ class AnalyzeResponse(BaseModel):
 
 
 class JobStatus(BaseModel):
-    """Status eines Analysejobs."""
+    """Status of an analysis job."""
     
     job_id: str
     status: str
@@ -58,19 +58,19 @@ class JobStatus(BaseModel):
 
 @app.get("/")
 async def root():
-    """Root-Endpunkt."""
+    """Root endpoint."""
     return {
         "name": "Marvin API",
         "version": __version__,
         "status": "running",
-        "description": "Der intelligente Task-Generator für AI-Coding-Assistenten",
+        "description": "The intelligent task generator for AI coding assistants",
     }
 
 
 @app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze(request: AnalyzeRequest):
-    """Analysiert ein PRD und gibt einen Job-ID zurück."""
-    # Hier würde die eigentliche Analyse gestartet werden
+    """Analyzes a PRD and returns a job ID."""
+    # Here, the actual analysis would be started
     job_id = "job_" + datetime.now().strftime("%Y%m%d%H%M%S")
     
     return AnalyzeResponse(
@@ -87,8 +87,8 @@ async def analyze_upload(
     codebase_zip: Optional[UploadFile] = None,
     output_format: str = "xml",
 ):
-    """Analysiert ein hochgeladenes PRD und gibt einen Job-ID zurück."""
-    # Hier würde die eigentliche Analyse gestartet werden
+    """Analyzes an uploaded PRD and returns a job ID."""
+    # Here, the actual analysis would be started
     job_id = "job_" + datetime.now().strftime("%Y%m%d%H%M%S")
     
     return AnalyzeResponse(
@@ -101,10 +101,10 @@ async def analyze_upload(
 
 @app.get("/jobs/{job_id}", response_model=JobStatus)
 async def get_job_status(job_id: str):
-    """Gibt den Status eines Jobs zurück."""
-    # Hier würde der tatsächliche Job-Status abgefragt werden
+    """Returns the status of a job."""
+    # Here, the actual job status would be queried
     if not job_id.startswith("job_"):
-        raise HTTPException(status_code=404, detail="Job nicht gefunden")
+        raise HTTPException(status_code=404, detail="Job not found")
     
     return JobStatus(
         job_id=job_id,
@@ -118,12 +118,12 @@ async def get_job_status(job_id: str):
 
 @app.get("/version")
 async def version():
-    """Gibt die Version zurück."""
+    """Returns the version."""
     return {"version": __version__}
 
 
 def start_server(host: str = "127.0.0.1", port: int = 8000):
-    """Startet den API-Server."""
+    """Starts the API server."""
     import uvicorn
     
     uvicorn.run(app, host=host, port=port)

@@ -1,4 +1,4 @@
-"""Konfiguration für Marvin."""
+"""Configuration for Marvin."""
 
 import os
 from pathlib import Path
@@ -9,11 +9,11 @@ from pydantic import BaseModel, Field
 
 
 class AgentConfig(BaseModel):
-    """Konfiguration für einen Agenten."""
+    """Configuration for an agent."""
     
     name: str
     enabled: bool = True
-    model: str = "gemini-pro"  # Standard-Modell für Google ADK
+    model: str = "gemini-pro"  # Default model for Google ADK
     temperature: float = 0.2
     max_tokens: int = 1024
     top_p: float = 0.95
@@ -21,7 +21,7 @@ class AgentConfig(BaseModel):
 
 
 class APIConfig(BaseModel):
-    """Konfiguration für die API."""
+    """Configuration for the API."""
     
     host: str = "127.0.0.1"
     port: int = 8000
@@ -29,31 +29,31 @@ class APIConfig(BaseModel):
     ssl_key: Optional[str] = None
     debug: bool = False
     cors_origins: List[str] = Field(default_factory=lambda: ["*"])
-    token_expiration: int = 3600  # in Sekunden
+    token_expiration: int = 3600  # in seconds
 
 
 class MCPConfig(BaseModel):
-    """Konfiguration für den MCP-Server."""
+    """Configuration for the MCP server."""
     
     host: str = "127.0.0.1"
     port: int = 9000
     ssl_cert: Optional[str] = None
     ssl_key: Optional[str] = None
     max_clients: int = 100
-    heartbeat_interval: int = 30  # in Sekunden
+    heartbeat_interval: int = 30  # in seconds
 
 
 class Context7Config(BaseModel):
-    """Konfiguration für Context 7."""
+    """Configuration for Context 7."""
     
     api_key: Optional[str] = None
     endpoint: str = "https://api.context7.com/v1"
-    timeout: int = 60  # in Sekunden
+    timeout: int = 60  # in seconds
     max_tokens: int = 8192
 
 
 class PathConfig(BaseModel):
-    """Konfiguration für Pfade."""
+    """Configuration for paths."""
     
     templates_dir: str = "./templates"
     output_dir: str = "./output"
@@ -62,7 +62,7 @@ class PathConfig(BaseModel):
 
 
 class MarvinConfig(BaseModel):
-    """Hauptkonfiguration für Marvin."""
+    """Main configuration for Marvin."""
     
     agents: Dict[str, AgentConfig] = Field(default_factory=dict)
     api: APIConfig = Field(default_factory=APIConfig)
@@ -74,29 +74,29 @@ class MarvinConfig(BaseModel):
 
 
 def load_config(config_path: Optional[Union[str, Path]] = None) -> MarvinConfig:
-    """Lädt die Konfiguration aus einer YAML-Datei.
+    """Loads the configuration from a YAML file.
     
     Args:
-        config_path: Pfad zur Konfigurationsdatei. Wenn None, werden Standardwerte verwendet.
+        config_path: Path to the configuration file. If None, default values are used.
         
     Returns:
-        Die geladene Konfiguration
+        The loaded configuration
         
     Raises:
-        FileNotFoundError: Wenn die angegebene Konfigurationsdatei nicht gefunden wurde
-        yaml.YAMLError: Wenn die YAML-Datei ungültig ist
+        FileNotFoundError: If the specified configuration file was not found
+        yaml.YAMLError: If the YAML file is invalid
     """
     config = {}
     
     if config_path:
         config_path = Path(config_path)
         if not config_path.exists():
-            raise FileNotFoundError(f"Konfigurationsdatei nicht gefunden: {config_path}")
+            raise FileNotFoundError(f"Configuration file not found: {config_path}")
         
         with open(config_path, "r", encoding="utf-8") as f:
             config = yaml.safe_load(f)
     
-    # Standard-Agent-Konfigurationen
+    # Default agent configurations
     if "agents" not in config:
         config["agents"] = {
             "document_analysis": {
@@ -125,7 +125,7 @@ def load_config(config_path: Optional[Union[str, Path]] = None) -> MarvinConfig:
             },
         }
     
-    # Umgebungsvariablen überschreiben Konfiguration
+    # Environment variables override configuration
     if os.environ.get("MARVIN_API_HOST"):
         if "api" not in config:
             config["api"] = {}
@@ -157,9 +157,9 @@ def load_config(config_path: Optional[Union[str, Path]] = None) -> MarvinConfig:
     if os.environ.get("MARVIN_ENVIRONMENT"):
         config["environment"] = os.environ["MARVIN_ENVIRONMENT"]
     
-    # Config-Objekt erstellen
+    # Create config object
     return MarvinConfig(**config)
 
 
-# Globale Konfiguration
+# Global configuration
 config = load_config()

@@ -1,1 +1,1 @@
-"""Kerndomäne von Marvin."""
+"""Core domain of Marvin."""

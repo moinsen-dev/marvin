@@ -1,151 +1,151 @@
-# Produktanforderungsdokument: Marvin
+# Product Requirements Document: Marvin
 
 > Version 1.0 | 2025-05-08
 
-## 1. Übersicht
+## 1. Overview
 
-Marvin ist ein intelligentes Tool zur Umwandlung von Produktanforderungsdokumenten (PRDs) in strukturierte AI-Coding-Tasks. Benannt nach dem paranoid-depressiven Roboter aus "Per Anhalter durch die Galaxis" hilft Marvin Entwicklern, ihre Projekte zu organisieren und AI-Coding-Assistenten (wie Cursor, Windsurf oder Claude Code) effektiv zu nutzen.
+Marvin is an intelligent tool for converting Product Requirements Documents (PRDs) into structured AI-Coding-Tasks. Named after the paranoid-depressive robot from "The Hitchhiker's Guide to the Galaxy," Marvin helps developers organize their projects and effectively use AI coding assistants (like Cursor, Windsurf, or Claude Code).
 
-## 2. Produktvision
+## 2. Product Vision
 
-Marvin ermöglicht Entwicklern, die Kraft von AI-Coding-Assistenten zu maximieren, indem es eine strukturierte Methode bietet, um komplexe Softwareanforderungen in wohlgeformte Aufgabensequenzen zu zerlegen. Diese Aufgaben werden in einem XML-Format bereitgestellt, das von AI-Assistenten optimal verarbeitet werden kann.
+Marvin enables developers to maximize the power of AI coding assistants by providing a structured method to break down complex software requirements into well-formed task sequences. These tasks are provided in an XML format that can be optimally processed by AI assistants.
 
-## 3. Zielgruppe
+## 3. Target Audience
 
-- Softwareentwickler, die mit AI-Coding-Assistenten arbeiten
-- Projektmanager, die Anforderungen in umsetzbare Tasks umwandeln möchten
-- Teams, die einen strukturierten Ansatz für die inkrementelle Produktentwicklung suchen
+- Software developers working with AI coding assistants
+- Project managers who want to convert requirements into actionable tasks
+- Teams seeking a structured approach for incremental product development
 
-## 4. Lösungsansatz
+## 4. Solution Approach
 
-Marvin verwendet einen agentenbasierten Ansatz mit vier Kernkomponenten:
+Marvin uses an agent-based approach with four core components:
 
-1. **PRD-Analyse**: Extraktion von Features und Anforderungen aus unstrukturierten Dokumenten
-2. **Codebase-Scanning**: Verstehen bestehender Projekte für nahtlose Feature-Integration
-3. **Task-Template-Generierung**: Erstellung XML-basierter Templates für AI-Coding-Assistenten
-4. **Sequenzplanung**: Optimale Anordnung von Tasks basierend auf Abhängigkeiten
+1. **PRD Analysis**: Extraction of features and requirements from unstructured documents
+2. **Codebase Scanning**: Understanding existing projects for seamless feature integration
+3. **Task Template Generation**: Creation of XML-based templates for AI coding assistants
+4. **Sequence Planning**: Optimal arrangement of tasks based on dependencies
 
-## 5. Systemarchitektur
+## 5. System Architecture
 
-Marvin nutzt eine Hexagonale Architektur (Ports & Adapter) mit:
+Marvin uses a Hexagonal Architecture (Ports & Adapters) with:
 
-- **Kerndomäne**: Businesslogik und Domänenmodelle
-- **Adapter**: Verschiedene Zugriffsmethoden (CLI, API, MCP-Server)
-- **Infrastruktur**: Technische Implementierungen für Parsers, Analyzers, etc.
-- **Agenten**: Spezialisierte KI-Komponenten für verschiedene Aufgaben
+- **Core Domain**: Business logic and domain models
+- **Adapters**: Various access methods (CLI, API, MCP server)
+- **Infrastructure**: Technical implementations for parsers, analyzers, etc.
+- **Agents**: Specialized AI components for various tasks
 
-## 6. Funktionale Anforderungen
+## 6. Functional Requirements
 
-### 6.1 PRD-Analyse
+### 6.1 PRD Analysis
 
-- **PRD-01**: Marvin kann Text-basierte PRDs (Markdown, Docs, PDF) einlesen und analysieren
-- **PRD-02**: Marvin extrahiert Features, Anforderungen und Abhängigkeiten aus PRDs
-- **PRD-03**: Marvin erkennt Prioritäten und Aufwandsschätzungen, wenn vorhanden
+- **PRD-01**: Marvin can read and analyze text-based PRDs (Markdown, Docs, PDF)
+- **PRD-02**: Marvin extracts features, requirements, and dependencies from PRDs
+- **PRD-03**: Marvin recognizes priorities and effort estimates, if present
 
-### 6.2 Codebase-Scanning
+### 6.2 Codebase Scanning
 
-- **CBS-01**: Marvin kann bestehende Codebases scannen und verstehen
-- **CBS-02**: Marvin identifiziert Architekturmuster und -komponenten
-- **CBS-03**: Marvin erkennt verwendete Technologien, Frameworks und Libraries
-- **CBS-04**: Marvin kann Code-Abhängigkeiten analysieren
+- **CBS-01**: Marvin can scan and understand existing codebases
+- **CBS-02**: Marvin identifies architecture patterns and components
+- **CBS-03**: Marvin recognizes technologies, frameworks, and libraries used
+- **CBS-04**: Marvin can analyze code dependencies
 
-### 6.3 Template-Generierung
+### 6.3 Template Generation
 
-- **TPL-01**: Marvin erstellt XML-basierte Task-Templates gemäß Vorgabe
-- **TPL-02**: Marvin füllt Templates automatisch mit relevanten Informationen aus PRD und Codebase
-- **TPL-03**: Marvin generiert sprechende TaskIDs und eindeutige Sequenznummern
+- **TPL-01**: Marvin creates XML-based task templates according to specifications
+- **TPL-02**: Marvin automatically fills templates with relevant information from PRD and codebase
+- **TPL-03**: Marvin generates descriptive TaskIDs and unique sequence numbers
 
-### 6.4 Sequenzplanung
+### 6.4 Sequence Planning
 
-- **SEQ-01**: Marvin plant optimale Implementierungsreihenfolgen basierend auf Abhängigkeiten
-- **SEQ-02**: Marvin erkennt und löst Konflikte zwischen abhängigen Tasks
-- **SEQ-03**: Marvin erlaubt manuelle Anpassung von Sequenzen
+- **SEQ-01**: Marvin plans optimal implementation sequences based on dependencies
+- **SEQ-02**: Marvin recognizes and resolves conflicts between dependent tasks
+- **SEQ-03**: Marvin allows manual adjustment of sequences
 
 ### 6.5 Interfaces
 
-- **INT-01**: Marvin bietet ein CLI für lokale Nutzung durch Entwickler
-- **INT-02**: Marvin bietet eine REST-API für Integrationen
-- **INT-03**: Marvin bietet einen MCP-Server für kollaborative Nutzung
+- **INT-01**: Marvin provides a CLI for local use by developers
+- **INT-02**: Marvin provides a REST API for integrations
+- **INT-03**: Marvin provides an MCP server for collaborative use
 
-## 7. Nichtfunktionale Anforderungen
+## 7. Non-Functional Requirements
 
 ### 7.1 Performance
 
-- **PERF-01**: Analyse eines PRDs mit 20 Features < 30 Sekunden
-- **PERF-02**: Codebase-Scanning < 1 Minute pro 10.000 LOC
+- **PERF-01**: Analysis of a PRD with 20 features < 30 seconds
+- **PERF-02**: Codebase scanning < 1 minute per 10,000 LOC
 
-### 7.2 Skalierbarkeit
+### 7.2 Scalability
 
-- **SCAL-01**: Unterstützung für PRDs mit bis zu 100 Features
-- **SCAL-02**: Unterstützung für Codebases mit bis zu 500.000 LOC
+- **SCAL-01**: Support for PRDs with up to 100 features
+- **SCAL-02**: Support for codebases with up to 500,000 LOC
 
-### 7.3 Sicherheit
+### 7.3 Security
 
-- **SEC-01**: Keine unverschlüsselten Daten in externen Speichern
-- **SEC-02**: API-Authentifizierung mit JWT
-- **SEC-03**: Rate-Limiting für alle Endpunkte
+- **SEC-01**: No unencrypted data in external storage
+- **SEC-02**: API authentication with JWT
+- **SEC-03**: Rate limiting for all endpoints
 
 ### 7.4 Usability
 
-- **USE-01**: Intuitive CLI-Befehle mit aussagekräftigen Hilfetexten
-- **USE-02**: Detaillierte Fortschrittsanzeigen bei langwierigen Operationen
-- **USE-03**: Strukturierte und verständliche Fehlermeldungen
+- **USE-01**: Intuitive CLI commands with meaningful help texts
+- **USE-02**: Detailed progress indicators for lengthy operations
+- **USE-03**: Structured and understandable error messages
 
-## 8. Anforderungen an Technologien und Integration
+## 8. Technology and Integration Requirements
 
-### 8.1 AI-Integration
+### 8.1 AI Integration
 
-- **AI-01**: Integration mit dem Google ADK für Agentenimplementierung
-- **AI-02**: Nutzung von Context 7 für tiefes Codeverständnis
-- **AI-03**: Möglichkeit der Offline-Nutzung mit lokalen LLMs
+- **AI-01**: Integration with Google ADK for agent implementation
+- **AI-02**: Use of Context 7 for deep code understanding
+- **AI-03**: Possibility of offline use with local LLMs
 
-### 8.2 DevOps-Integration
+### 8.2 DevOps Integration
 
-- **DEV-01**: Bereitstellung als Docker-Container
-- **DEV-02**: CI/CD-Pipeline für kontinuierliche Tests und Deployment
-- **DEV-03**: API-Endpoints für gängige CI/CD-Systeme
+- **DEV-01**: Deployment as Docker container
+- **DEV-02**: CI/CD pipeline for continuous testing and deployment
+- **DEV-03**: API endpoints for common CI/CD systems
 
-## 9. Projektplanung
+## 9. Project Planning
 
 ### 9.1 MVP (Minimal Viable Product)
 
 Phase 1:
-- Grundlegende Projektstruktur
-- Domänenmodelle implementieren
-- Einfache PRD-Analyse mit Regex/NLP
-- Basistemplategenerierung
-- CLI-Interface
+- Basic project structure
+- Implement domain models
+- Simple PRD analysis with Regex/NLP
+- Basic template generation
+- CLI interface
 
 Phase 2:
-- Integration mit Context 7
-- Verbesserter PRD-Parser mit LLM
-- Sequenzplaner implementieren
-- Einfache API mit FastAPI
+- Integration with Context 7
+- Improved PRD parser with LLM
+- Implement sequence planner
+- Simple API with FastAPI
 
-### 9.2 Vollversion
+### 9.2 Full Version
 
-- Integration mit Google ADK
-- Vollständige Agentenimplementierung
-- MCP-Server
-- Umfangreiche Tests und Dokumentation
+- Integration with Google ADK
+- Complete agent implementation
+- MCP server
+- Extensive tests and documentation
 
-### 9.3 Erweiterungen
+### 9.3 Extensions
 
-- Integration mit CI/CD-Systemen
-- KI-basierte Verbesserungsvorschläge für Tasks
-- Multi-Projekt-Unterstützung
-- Kollaborative Funktionen
+- Integration with CI/CD systems
+- AI-based improvement suggestions for tasks
+- Multi-project support
+- Collaborative features
 
-## 10. Annahmen und Einschränkungen
+## 10. Assumptions and Limitations
 
-- Marvin benötigt Python 3.11 oder höher
-- Für optimale Ergebnisse wird eine Internetverbindung empfohlen
-- Lokale LLM-Nutzung erhöht die Hardware-Anforderungen erheblich
+- Marvin requires Python 3.11 or higher
+- An internet connection is recommended for optimal results
+- Local LLM usage significantly increases hardware requirements
 
-## 11. Glossar
+## 11. Glossary
 
-- **PRD**: Product Requirements Document (Produktanforderungsdokument)
+- **PRD**: Product Requirements Document
 - **ADK**: Agent Development Kit (Google)
-- **MCP**: Master Control Program (Server für kollaborative Nutzung)
+- **MCP**: Master Control Program (server for collaborative use)
 - **LLM**: Large Language Model
-- **Task**: Eine einzelne, klar definierte Entwicklungsaufgabe
+- **Task**: A single, clearly defined development task

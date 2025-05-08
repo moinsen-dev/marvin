@@ -1,122 +1,130 @@
-# Marvin - Installationsanleitung
+# Marvin - Installation Guide
 
-In dieser Anleitung wird beschrieben, wie du Marvin lokal installierst und mit der Entwicklung beginnst.
+This guide describes how to install Marvin locally and start development.
 
-## Voraussetzungen
+## Prerequisites
 
-- Python 3.11 oder höher
-- Poetry (für Dependency-Management)
+- Python 3.11 or higher
+- uv (for dependency management)
 - Git
 
 ## Installation
 
-### 1. Repository klonen
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/marvin.git
 cd marvin
 ```
 
-### 2. Virtuelle Umgebung einrichten mit Poetry
+### 2. Set up virtual environment with uv
 
 ```bash
-# Poetry installieren (falls noch nicht vorhanden)
-curl -sSL https://install.python-poetry.org | python3 -
+# Install uv (if not already installed)
+pip install uv
 
-# Abhängigkeiten installieren
-poetry install
+# Create and activate virtual environment
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
+uv pip install -e .
+
+# For development dependencies
+uv pip install -r requirements-dev.txt
 ```
 
-### 3. Entwicklungsumgebung aktivieren
+### 3. Verify installation
 
 ```bash
-poetry shell
+# Check if Marvin is correctly installed
+marvin --version
 ```
 
-## Verwendung
+## Usage
 
-Marvin kann auf drei verschiedene Arten verwendet werden:
+Marvin can be used in three different ways:
 
-### 1. Als CLI-Tool
+### 1. As CLI tool
 
 ```bash
-# Hilfe anzeigen
+# Show help
 marvin --help
 
-# Ein PRD analysieren und AI-Coding-Tasks generieren
+# Analyze a PRD and generate AI-Coding-Tasks
 marvin analyze path/to/prd.md --output ./output-dir
 
-# Mit Codebase-Analyse
+# With codebase analysis
 marvin analyze path/to/prd.md --codebase path/to/codebase --output ./output-dir
 ```
 
-### 2. Als API-Server
+### 2. As API server
 
 ```bash
-# API-Server starten
+# Start API server
 marvin serve-api
 
-# Mit benutzerdefiniertem Host und Port
+# With custom host and port
 marvin serve-api --host 0.0.0.0 --port 8080
 ```
 
-Die API ist dann unter `http://localhost:8000` (bzw. dem angegebenen Host/Port) erreichbar.
+The API is then accessible at `http://localhost:8000` (or the specified host/port).
 
-### 3. Als MCP-Server
+### 3. As MCP server
 
 ```bash
-# MCP-Server starten
+# Start MCP server
 marvin serve-mcp
 
-# Mit benutzerdefiniertem Host und Port
+# With custom host and port
 marvin serve-mcp --host 0.0.0.0 --port 9090
 ```
 
-## Entwicklung
+## Development
 
-### Tests ausführen
+### Running tests
 
 ```bash
-# Alle Tests ausführen
+# Run all tests
 pytest
 
-# Mit Coverage-Bericht
+# With coverage report
 pytest --cov=marvin
 
-# Nur Unit-Tests
+# Unit tests only
 pytest tests/unit
 ```
 
-### Code formatieren
+### Formatting code
 
 ```bash
-# Code formatieren mit Black
+# Format code with Black
 black src tests
 
-# Imports sortieren mit isort
+# Sort imports with isort
 isort src tests
 ```
 
 ### Linting
 
 ```bash
-# Code prüfen mit Ruff
+# Check code with Ruff
 ruff check src tests
 ```
 
-## Konfiguration
+## Configuration
 
-Marvin kann über Umgebungsvariablen konfiguriert werden:
+Marvin can be configured via environment variables:
 
-- `MARVIN_API_HOST` - Host für den API-Server
-- `MARVIN_API_PORT` - Port für den API-Server
-- `MARVIN_MCP_HOST` - Host für den MCP-Server
-- `MARVIN_MCP_PORT` - Port für den MCP-Server
-- `MARVIN_CONTEXT7_API_KEY` - API-Key für Context 7
-- `MARVIN_LOG_LEVEL` - Log-Level (INFO, DEBUG, WARNING, ERROR)
-- `MARVIN_ENVIRONMENT` - Umgebung (development, production)
+- `MARVIN_API_HOST` - Host for the API server
+- `MARVIN_API_PORT` - Port for the API server
+- `MARVIN_MCP_HOST` - Host for the MCP server
+- `MARVIN_MCP_PORT` - Port for the MCP server
+- `MARVIN_CONTEXT7_API_KEY` - API key for Context 7
+- `MARVIN_LOG_LEVEL` - Log level (INFO, DEBUG, WARNING, ERROR)
+- `MARVIN_ENVIRONMENT` - Environment (development, production)
 
-Beispiel:
+Example:
 
 ```bash
 export MARVIN_LOG_LEVEL=DEBUG
@@ -124,26 +132,35 @@ export MARVIN_ENVIRONMENT=development
 marvin analyze path/to/prd.md
 ```
 
-## Beispiel-PRD verwenden
+## Using the example PRD
 
-Im `examples`-Verzeichnis findest du ein Beispiel-PRD:
+You can find an example PRD in the `examples` directory:
 
 ```bash
 marvin analyze examples/prd/example_prd.md
 ```
 
-## Fehlersuche
+## Troubleshooting
 
-Falls Probleme auftreten, prüfe Folgendes:
+If you encounter problems, check the following:
 
-1. Ist Python 3.11 oder höher installiert? `python --version`
-2. Ist Poetry installiert? `poetry --version`
-3. Wurden alle Abhängigkeiten installiert? `poetry show`
-4. Ist die virtuelle Umgebung aktiviert? `poetry env info`
+1. Is Python 3.11 or higher installed? `python --version`
+2. Is uv installed? `uv --version`
+3. Is the virtual environment activated? `which python` should point to your virtual environment
+4. Are all dependencies installed? `uv pip freeze`
 
-## Nächste Schritte
+## Why uv?
 
-- Implementiere einen eigenen Agenten
-- Füge neue Features hinzu
-- Verbessere die Dokumentation
-- Trage zur Projektentwicklung bei
+We use uv instead of other package managers because:
+
+1. **Speed**: uv is significantly faster than pip and Poetry
+2. **Compatibility**: uv works with standard requirements.txt files and pyproject.toml
+3. **Reliability**: uv has improved dependency resolution
+4. **Feature-rich**: uv includes virtual environment management and more
+
+## Next Steps
+
+- Implement your own agent
+- Add new features
+- Improve documentation
+- Contribute to project development

@@ -1,4 +1,4 @@
-"""Command Line Interface für Marvin."""
+"""Command Line Interface for Marvin."""
 
 import os
 import sys
@@ -16,7 +16,7 @@ from marvin.adapters.cli.commands import (
 
 app = typer.Typer(
     name="marvin",
-    help="Marvin - Der intelligente Task-Generator für AI-Coding-Assistenten",
+    help="Marvin - The intelligent task generator for AI coding assistants",
     add_completion=False,
 )
 
@@ -24,7 +24,7 @@ console = Console()
 
 
 def _print_version(value: bool) -> None:
-    """Zeigt die Version an und beendet das Programm."""
+    """Displays the version and exits the program."""
     if value:
         console.print(f"Marvin version: {__version__}")
         raise typer.Exit()
@@ -36,44 +36,44 @@ def callback(
         None,
         "--version",
         "-v",
-        help="Zeigt die Version an und beendet das Programm.",
+        help="Displays the version and exits the program.",
         callback=_print_version,
         is_eager=True,
     ),
 ) -> None:
-    """Marvin - Der intelligente Task-Generator für AI-Coding-Assistenten."""
+    """Marvin - The intelligent task generator for AI coding assistants."""
     pass
 
 
 @app.command("analyze")
 def analyze_prd(
-    prd_path: str = typer.Argument(..., help="Pfad zum PRD-Dokument"),
+    prd_path: str = typer.Argument(..., help="Path to the PRD document"),
     codebase_path: Optional[str] = typer.Option(
-        None, "--codebase", "-c", help="Pfad zur bestehenden Codebase (optional)"
+        None, "--codebase", "-c", help="Path to the existing codebase (optional)"
     ),
     output_dir: str = typer.Option(
-        "./marvin-output", "--output", "-o", help="Ausgabeverzeichnis für die Tasks"
+        "./marvin-output", "--output", "-o", help="Output directory for tasks"
     ),
 ) -> None:
-    """Analysiert ein PRD und generiert AI-Coding-Tasks."""
+    """Analyzes a PRD and generates AI coding tasks."""
     analyze_prd_command(prd_path, codebase_path, output_dir)
 
 
 @app.command("serve-api")
 def serve_api(
-    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host-Adresse"),
+    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host address"),
     port: int = typer.Option(8000, "--port", "-p", help="Port"),
 ) -> None:
-    """Startet den API-Server."""
+    """Starts the API server."""
     serve_api_command(host, port)
 
 
 @app.command("serve-mcp")
 def serve_mcp(
-    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host-Adresse"),
+    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host address"),
     port: int = typer.Option(9000, "--port", "-p", help="Port"),
 ) -> None:
-    """Startet den MCP-Server."""
+    """Starts the MCP server."""
     serve_mcp_command(host, port)
 
 

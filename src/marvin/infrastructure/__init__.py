@@ -1,1 +1,1 @@
-"""Infrastrukturschicht für Marvin."""
+"""Infrastructure layer for Marvin."""

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================
+     Universal AI‑Coding Task Template v2.0 (incremental)
+     Save each instance as NN_<area>_<feature>.xml where NN is the
+     sequence number (01, 02, …).
+     ============================================================ -->
+<CodingTask>
+  <SequenceInfo>
+    <TaskID></TaskID>               <!-- unique slug, e.g. auth-api-v1 -->
+    <SequenceNumber></SequenceNumber><!-- integer, ascending order -->
+    <DependsOn></DependsOn>         <!-- comma‑separated TaskIDs -->
+  </SequenceInfo>
+
+  <Metadata>
+    <Author></Author>
+    <Date></Date>                   <!-- ISO‑8601 -->
+    <TemplateVersion>2.0</TemplateVersion>
+    <RevisionHistory>
+      <Change version="" date="" author="" summary=""/>
+    </RevisionHistory>
+  </Metadata>
+
+  <Context>
+    <ProjectName></ProjectName>
+    <ProjectDescription></ProjectDescription>
+    <BusinessDomain></BusinessDomain>
+    <Stakeholders>
+      <Stakeholder role="" name="" contact="" responsibility=""/>
+    </Stakeholders>
+    <Assumptions></Assumptions>
+    <Risks mitigationPlan=""></Risks>
+    <Dependencies>
+      <Upstream></Upstream>
+      <Downstream></Downstream>
+    </Dependencies>
+    <Constraints></Constraints>
+  </Context>
+
+  <TechnologyStack>
+    <Languages>
+      <Language name="" version=""/>
+    </Languages>
+    <Frameworks>
+      <Framework name="" version=""/>
+    </Frameworks>
+    <PackageManagers></PackageManagers>
+    <DatabaseSystems></DatabaseSystems>
+    <CloudProvider></CloudProvider>
+    <Containerization></Containerization>
+    <OtherTechnologies>
+      <Technology name="" version=""/>
+    </OtherTechnologies>
+  </TechnologyStack>
+
+  <Architecture>
+    <Pattern></Pattern>
+    <ArchitectureDecisionRecords>
+      <ADR id="" status="" link=""/>
+    </ArchitectureDecisionRecords>
+    <DomainModel></DomainModel>
+  </Architecture>
+
+  <Task>
+    <TaskName></TaskName>
+    <UserStories>
+      <Story id="" role="" goal="" benefit="" acceptanceCriteria=""/>
+    </UserStories>
+    <Description></Description>
+    <Purpose></Purpose>
+    <Scope>
+      <InScope></InScope>
+      <OutOfScope></OutOfScope>
+    </Scope>
+    <AffectedComponents>
+      <Files></Files>
+      <Folders></Folders>
+    </AffectedComponents>
+  </Task>
+
+  <ExpectedOutcome>
+    <FunctionalRequirements></FunctionalRequirements>
+    <NonFunctionalRequirements>
+      <Performance></Performance>
+      <Scalability></Scalability>
+      <Security level=""></Security>
+      <Accessibility targetWCAGLevel=""></Accessibility>
+      <Internationalization locales=""></Internationalization>
+      <Observability SLOs=""></Observability>
+    </NonFunctionalRequirements>
+    <AcceptanceCriteria></AcceptanceCriteria>
+  </ExpectedOutcome>
+
+  <Implementation>
+    <CodeStandardsRef link=""></CodeStandardsRef>
+    <APIContract type="OpenAPI|GraphQL" link=""></APIContract>
+    <DesignPatterns></DesignPatterns>
+    <Security>
+      <ThreatModel></ThreatModel>
+      <Auth></Auth>
+      <DataClassification></DataClassification>
+      <ComplianceStandards></ComplianceStandards>
+    </Security>
+    <Testing>
+      <TestFramework></TestFramework>
+      <CoverageTarget></CoverageTarget>
+      <QualityGates></QualityGates>
+    </Testing>
+    <CI_CD_Pipeline>
+      <Toolchain></Toolchain>
+      <Environments dev="" test="" staging="" prod=""/>
+      <DeploymentStrategy></DeploymentStrategy>
+      <RollbackPlan></RollbackPlan>
+    </CI_CD_Pipeline>
+    <LoggingMonitoring>
+      <LogSchema></LogSchema>
+      <AlertingRules></AlertingRules>
+    </LoggingMonitoring>
+    <DataMigration>
+      <Scope></Scope>
+      <DryRunPlan></DryRunPlan>
+      <Validation></Validation>
+      <Fallback></Fallback>
+    </DataMigration>
+    <PerformanceConsiderations></PerformanceConsiderations>
+  </Implementation>
+
+  <References>
+    <ExistingCode link=""></ExistingCode>
+    <Documentation link=""></Documentation>
+    <ExternalResources link=""></ExternalResources>
+  </References>
+
+  <Deliverables>
+    <Checklist>
+      <Item done="false">Repo branch created</Item>
+      <Item done="false">Unit tests pass at 90% coverage</Item>
+      <Item done="false">Security review signed-off</Item>
+    </Checklist>
+    <ExpectedTimeframe></ExpectedTimeframe>
+  </Deliverables>
+
+  <Glossary>
+    <Term acronym="" definition=""/>
+  </Glossary>
+</CodingTask>

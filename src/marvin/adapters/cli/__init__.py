@@ -1,1 +1,1 @@
-"""CLI-Adapter für Marvin."""
+"""CLI adapter for Marvin."""
