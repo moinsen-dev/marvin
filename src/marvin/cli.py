@@ -1,7 +1,5 @@
 """Command Line Interface for Marvin."""
 
-import os
-import sys
 from typing import Optional
 
 import typer
@@ -13,6 +11,7 @@ from marvin.adapters.cli.commands import (
     serve_api_command,
     serve_mcp_command,
 )
+from marvin.logging import get_logger
 
 app = typer.Typer(
     name="marvin",
@@ -21,12 +20,14 @@ app = typer.Typer(
 )
 
 console = Console()
+logger = get_logger("cli")
 
 
 def _print_version(value: bool) -> None:
     """Displays the version and exits the program."""
     if value:
         console.print(f"Marvin version: {__version__}")
+        logger.info(f"Version {__version__} displayed")
         raise typer.Exit()
 
 
@@ -56,7 +57,9 @@ def analyze_prd(
     ),
 ) -> None:
     """Analyzes a PRD and generates AI coding tasks."""
+    logger.info(f"Analyzing PRD: {prd_path}")
     analyze_prd_command(prd_path, codebase_path, output_dir)
+    logger.success(f"Analysis complete. Output saved to {output_dir}")
 
 
 @app.command("serve-api")
@@ -65,6 +68,7 @@ def serve_api(
     port: int = typer.Option(8000, "--port", "-p", help="Port"),
 ) -> None:
     """Starts the API server."""
+    logger.info(f"Starting API server on {host}:{port}")
     serve_api_command(host, port)
 
 
@@ -74,6 +78,7 @@ def serve_mcp(
     port: int = typer.Option(9000, "--port", "-p", help="Port"),
 ) -> None:
     """Starts the MCP server."""
+    logger.info(f"Starting MCP server on {host}:{port}")
     serve_mcp_command(host, port)
 
 

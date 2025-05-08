@@ -23,6 +23,8 @@ dependencies = [
     "langchain>=0.3.25",
     "PyYAML>=6.0.2",
     "websockets>=15.0.1",
+    "loguru>=0.7.3",
+    "types-pyyaml>=6.0.12.20250402",
 ]
 
 [project.optional-dependencies]
