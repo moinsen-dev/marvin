@@ -1,0 +1,1 @@
+"""Template-Generator für Marvin."""

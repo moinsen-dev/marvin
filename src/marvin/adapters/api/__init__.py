@@ -1,0 +1,1 @@
+"""API-Adapter für Marvin."""

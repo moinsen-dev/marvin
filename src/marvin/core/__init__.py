@@ -1,0 +1,1 @@
+"""Kerndomäne von Marvin."""

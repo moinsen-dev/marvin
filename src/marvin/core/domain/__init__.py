@@ -1,0 +1,1 @@
+"""Domänenmodelle für Marvin."""
