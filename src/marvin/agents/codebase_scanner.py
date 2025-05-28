@@ -6,7 +6,7 @@ identifying architecture patterns, components, and technologies used.
 """
 
 import os
-from typing import Any, Dict, List
+from typing import Any
 
 from google.adk.agents import Agent
 from google.genai.types import Content, Part
@@ -15,8 +15,8 @@ from marvin.agents.base import MODEL_GEMINI_2_0_PRO, create_runner
 
 
 def scan_directory(
-    directory_path: str, ignore_dirs: List[str] = None
-) -> Dict[str, List[str]]:
+    directory_path: str, ignore_dirs: list[str] = None
+) -> dict[str, list[str]]:
     """
     Scan a directory and collect information about files.
 
@@ -51,7 +51,7 @@ def scan_directory(
     return result
 
 
-def analyze_codebase(directory_path: str, tool_context: Any = None) -> Dict:
+def analyze_codebase(directory_path: str, tool_context: Any = None) -> dict:
     """
     Analyze a codebase directory and extract information about architecture, patterns, etc.
 
@@ -108,7 +108,7 @@ key findings about the codebase structure, patterns, and technologies.""",
 codebase_scanner_runner = create_runner(codebase_scanner_agent)
 
 
-async def scan_codebase_async(directory_path: str) -> Dict:
+async def scan_codebase_async(directory_path: str) -> dict:
     """
     Scan a codebase asynchronously using the codebase scanner agent.
 

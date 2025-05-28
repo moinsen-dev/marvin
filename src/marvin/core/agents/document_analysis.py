@@ -4,7 +4,7 @@ import os
 import re
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from marvin.core.agents.base import Agent
 from marvin.core.domain.models import PRD, Feature
@@ -14,7 +14,7 @@ class DocumentAnalysisAgent(Agent):
     """Agent for analyzing PRDs and extracting features and requirements."""
 
     def __init__(
-        self, name: str = "document_analysis", config: Optional[Dict[str, Any]] = None
+        self, name: str = "document_analysis", config: dict[str, Any] | None = None
     ):
         """Initializes the DocumentAnalysisAgent.
 
@@ -26,7 +26,7 @@ class DocumentAnalysisAgent(Agent):
 
     async def execute(
         self, document_path: str, **kwargs: Any
-    ) -> Tuple[PRD, List[Feature]]:
+    ) -> tuple[PRD, list[Feature]]:
         """Analyzes a PRD and extracts features and requirements.
 
         Args:
@@ -88,7 +88,7 @@ class DocumentAnalysisAgent(Agent):
 
     async def _analyze_markdown(
         self, document_path: str, **kwargs: Any
-    ) -> Tuple[PRD, List[Feature]]:
+    ) -> tuple[PRD, list[Feature]]:
         """Analyzes a Markdown PRD.
 
         Args:
@@ -102,7 +102,7 @@ class DocumentAnalysisAgent(Agent):
 
         # Read document
         try:
-            with open(document_path, "r", encoding="utf-8") as f:
+            with open(document_path, encoding="utf-8") as f:
                 content = f.read()
             self.logger.debug(f"Read {len(content)} bytes from document")
         except Exception as e:
@@ -175,7 +175,7 @@ class DocumentAnalysisAgent(Agent):
 
     async def _analyze_word(
         self, document_path: str, **kwargs: Any
-    ) -> Tuple[PRD, List[Feature]]:
+    ) -> tuple[PRD, list[Feature]]:
         """Analyzes a Word PRD.
 
         Args:
@@ -192,7 +192,7 @@ class DocumentAnalysisAgent(Agent):
 
     async def _analyze_pdf(
         self, document_path: str, **kwargs: Any
-    ) -> Tuple[PRD, List[Feature]]:
+    ) -> tuple[PRD, list[Feature]]:
         """Analyzes a PDF PRD.
 
         Args:

@@ -4,7 +4,7 @@ import os
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from google.adk.agents import LlmAgent
 from google.adk.agents.callback_context import CallbackContext
@@ -24,7 +24,7 @@ from marvin.core.domain.models import PRD, Feature
 # Content filter callback for inappropriate content
 def content_filter(
     context: CallbackContext, llm_request: LlmRequest
-) -> Optional[LlmResponse]:
+) -> LlmResponse | None:
     """Implements a content filter guardrail to prevent processing of inappropriate content."""
     FORBIDDEN_WORDS = ["confidential", "private", "secret", "internal"]
 
@@ -63,7 +63,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
         self,
         name: str = "marvin_document_analyzer_adk",
         model: str = "gemini-pro",
-        config: Optional[Dict[str, Any]] = None,
+        config: dict[str, Any] | None = None,
         **kwargs: Any,
     ):
         """Initializes the DocumentAnalyzerADKAgent.
@@ -112,7 +112,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
         )
 
     async def _read_document_content(
-        self, document_path: str, tool_context: Optional[Any] = None
+        self, document_path: str, tool_context: Any | None = None
     ) -> str:
         """
         Reads the content of the document based on its extension.
@@ -129,7 +129,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
         try:
             if file_ext == ".md":
                 self.logger.debug(f"Processing Markdown document: {document_path}")
-                with open(document_path, "r", encoding="utf-8") as f:
+                with open(document_path, encoding="utf-8") as f:
                     content = f.read()
 
                 # Update state if tool_context is provided
@@ -157,7 +157,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
             self.logger.error(f"Error reading document {document_path}: {str(e)}")
             raise
 
-    async def _parse_llm_response(self, llm_output: str) -> Tuple[PRD, List[Feature]]:
+    async def _parse_llm_response(self, llm_output: str) -> tuple[PRD, list[Feature]]:
         """
         Parses the structured JSON output from the LLM into PRD and Feature domain models.
         """
@@ -182,7 +182,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
                 updated_at=current_time,
             )
 
-            extracted_features: List[Feature] = []
+            extracted_features: list[Feature] = []
             for i, feature_data in enumerate(data.get("features", [])):
                 feature = Feature(
                     id=feature_data.get("id", f"{prd_id}_feature_{i:02d}"),
@@ -213,7 +213,7 @@ class DocumentAnalyzerADKAgent(LlmAgent):
 
     async def analyze_prd_file(
         self, document_path: str, **kwargs: Any
-    ) -> Tuple[PRD, List[Feature]]:
+    ) -> tuple[PRD, list[Feature]]:
         """
         Analyzes a PRD document file by reading its content, invoking the LLM
         via ADK, and parsing the response into structured domain objects.
@@ -375,7 +375,7 @@ def setup_document_analyzer(
     app_name: str = "prd_analyzer",
     user_id: str = "default_user",
     session_id: str = "default_session",
-) -> Tuple[DocumentAnalyzerADKAgent, Runner]:
+) -> tuple[DocumentAnalyzerADKAgent, Runner]:
     """
     Sets up the document analyzer agent with proper session management.
 
@@ -386,7 +386,7 @@ def setup_document_analyzer(
     session_service = InMemorySessionService()
 
     # Create session
-    session = session_service.create_session(
+    session_service.create_session(
         app_name=app_name, user_id=user_id, session_id=session_id
     )
 

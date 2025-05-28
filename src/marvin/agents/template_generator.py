@@ -8,7 +8,7 @@ for AI coding assistants based on PRD analysis and codebase scanning results.
 import uuid
 import xml.dom.minidom
 import xml.etree.ElementTree as ET
-from typing import Any, Dict, List
+from typing import Any
 
 from google.adk.agents import Agent
 from google.genai.types import Content, Part
@@ -37,10 +37,10 @@ def generate_task_id(feature_name: str) -> str:
 
 def create_task_template(
     feature: str,
-    requirements: List[str],
-    dependencies: List[str] = None,
+    requirements: list[str],
+    dependencies: list[str] = None,
     tool_context: Any = None,
-) -> Dict:
+) -> dict:
     """
     Create an XML task template for an AI coding assistant.
 
@@ -103,7 +103,7 @@ Present the results clearly to the user, explaining how the template can be used
 template_generator_runner = create_runner(template_generator_agent)
 
 
-async def generate_templates_async(analysis_results: Dict) -> Dict:
+async def generate_templates_async(analysis_results: dict) -> dict:
     """
     Generate task templates asynchronously using the template generator agent.
 

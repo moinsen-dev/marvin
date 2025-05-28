@@ -7,13 +7,12 @@ This module provides a command-line interface for interacting with Marvin.
 import argparse
 import os
 import sys
-from typing import List, Optional
 
 from marvin.agents.main_agent import process_prd
 from marvin.api import start_server
 
 
-def parse_args(args: List[str]) -> argparse.Namespace:
+def parse_args(args: list[str]) -> argparse.Namespace:
     """
     Parse command-line arguments.
 
@@ -51,7 +50,7 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     return parser.parse_args(args)
 
 
-def save_results(results: List[str], output_dir: str) -> None:
+def save_results(results: list[str], output_dir: str) -> None:
     """
     Save processing results to files.
 
@@ -73,7 +72,7 @@ def save_results(results: List[str], output_dir: str) -> None:
     print(f"Results saved to {output_dir}")
 
 
-def main(args: Optional[List[str]] = None) -> int:
+def main(args: list[str] | None = None) -> int:
     """
     Main entry point for the CLI.
 

@@ -4,7 +4,6 @@ import asyncio
 import os
 import time
 from datetime import datetime
-from typing import Optional
 
 from rich.console import Console
 from rich.panel import Panel
@@ -24,7 +23,7 @@ logger = get_logger("cli.commands")
 
 def analyze_prd_command(
     prd_path: str,
-    codebase_path: Optional[str] = None,
+    codebase_path: str | None = None,
     output_dir: str = "./marvin-output",
 ) -> None:
     """Analyzes a PRD and generates AI coding tasks.

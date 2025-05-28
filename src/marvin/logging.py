@@ -2,9 +2,10 @@ import functools
 import sys
 import time
 import traceback
+from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Callable, Generator, Optional, TypeVar
+from typing import Any, TypeVar
 
 from loguru import logger
 
@@ -102,7 +103,7 @@ def log_time(logger_instance: Any, operation: str) -> Generator[None, None, None
         raise
 
 
-def log_function_time(logger_instance: Optional[Any] = None) -> Callable:
+def log_function_time(logger_instance: Any | None = None) -> Callable:
     """
     Decorator for timing function execution and logging the duration.
 

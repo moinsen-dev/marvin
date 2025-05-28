@@ -2,7 +2,7 @@
 
 import abc
 import time
-from typing import Any, Dict, Optional
+from typing import Any
 
 from marvin.logging import get_logger
 
@@ -10,7 +10,7 @@ from marvin.logging import get_logger
 class Agent(abc.ABC):
     """Abstract base class for all Marvin agents."""
 
-    def __init__(self, name: str, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, name: str, config: dict[str, Any] | None = None):
         """Initializes an agent.
 
         Args:

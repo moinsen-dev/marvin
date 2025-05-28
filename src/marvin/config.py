@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 import yaml
 from pydantic import BaseModel, Field
@@ -21,7 +21,7 @@ class AgentConfig(BaseModel):
     temperature: float = 0.2
     max_tokens: int = 1024
     top_p: float = 0.95
-    extra_params: Dict[str, Any] = Field(default_factory=dict)
+    extra_params: dict[str, Any] = Field(default_factory=dict)
 
 
 class APIConfig(BaseModel):
@@ -29,10 +29,10 @@ class APIConfig(BaseModel):
 
     host: str = "127.0.0.1"
     port: int = 8000
-    ssl_cert: Optional[str] = None
-    ssl_key: Optional[str] = None
+    ssl_cert: str | None = None
+    ssl_key: str | None = None
     debug: bool = False
-    cors_origins: List[str] = Field(default_factory=lambda: ["*"])
+    cors_origins: list[str] = Field(default_factory=lambda: ["*"])
     token_expiration: int = 3600  # in seconds
 
 
@@ -41,8 +41,8 @@ class MCPConfig(BaseModel):
 
     host: str = "127.0.0.1"
     port: int = 9000
-    ssl_cert: Optional[str] = None
-    ssl_key: Optional[str] = None
+    ssl_cert: str | None = None
+    ssl_key: str | None = None
     max_clients: int = 100
     heartbeat_interval: int = 30  # in seconds
 
@@ -50,7 +50,7 @@ class MCPConfig(BaseModel):
 class Context7Config(BaseModel):
     """Configuration for Context 7."""
 
-    api_key: Optional[str] = None
+    api_key: str | None = None
     endpoint: str = "https://api.context7.com/v1"
     timeout: int = 60  # in seconds
     max_tokens: int = 8192
@@ -68,7 +68,7 @@ class PathConfig(BaseModel):
 class MarvinConfig(BaseModel):
     """Main configuration for Marvin."""
 
-    agents: Dict[str, AgentConfig] = Field(default_factory=dict)
+    agents: dict[str, AgentConfig] = Field(default_factory=dict)
     api: APIConfig = Field(default_factory=APIConfig)
     mcp: MCPConfig = Field(default_factory=MCPConfig)
     context7: Context7Config = Field(default_factory=Context7Config)
@@ -77,7 +77,7 @@ class MarvinConfig(BaseModel):
     environment: str = "development"
 
 
-def load_config(config_path: Optional[Union[str, Path]] = None) -> MarvinConfig:
+def load_config(config_path: str | Path | None = None) -> MarvinConfig:
     """Loads the configuration from a YAML file.
 
     Args:
@@ -100,7 +100,7 @@ def load_config(config_path: Optional[Union[str, Path]] = None) -> MarvinConfig:
 
         logger.info(f"Loading configuration from {config_path}")
         try:
-            with open(config_path, "r", encoding="utf-8") as f:
+            with open(config_path, encoding="utf-8") as f:
                 config = yaml.safe_load(f)
             logger.debug("Configuration file loaded successfully")
         except yaml.YAMLError as e:

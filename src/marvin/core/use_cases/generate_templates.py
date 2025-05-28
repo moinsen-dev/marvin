@@ -2,7 +2,7 @@
 
 import os
 import time
-from typing import Any, List, Optional, Tuple
+from typing import Any
 
 from marvin.core.agents.codebase_analysis import CodebaseAnalysisAgent
 from marvin.core.agents.document_analysis import DocumentAnalysisAgent
@@ -17,9 +17,9 @@ class GenerateTemplatesUseCase:
     def __init__(
         self,
         document_analysis_agent: DocumentAnalysisAgent,
-        codebase_analysis_agent: Optional[CodebaseAnalysisAgent] = None,
-        sequence_planner_agent: Optional[SequencePlannerAgent] = None,
-        template_generation_agent: Optional[TemplateGenerationAgent] = None,
+        codebase_analysis_agent: CodebaseAnalysisAgent | None = None,
+        sequence_planner_agent: SequencePlannerAgent | None = None,
+        template_generation_agent: TemplateGenerationAgent | None = None,
     ):
         """Initializes the GenerateTemplatesUseCase.
 
@@ -44,9 +44,9 @@ class GenerateTemplatesUseCase:
         self,
         prd_path: str,
         output_dir: str,
-        codebase_path: Optional[str] = None,
+        codebase_path: str | None = None,
         **kwargs: Any,
-    ) -> Tuple[str, List[str]]:
+    ) -> tuple[str, list[str]]:
         """Executes the use case.
 
         Args:

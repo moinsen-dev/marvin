@@ -6,7 +6,7 @@ based on task dependencies, resolving conflicts, and arranging tasks
 in the most efficient order.
 """
 
-from typing import Any, Dict, List
+from typing import Any
 
 import networkx as nx
 from google.adk.agents import Agent
@@ -16,8 +16,8 @@ from marvin.agents.base import MODEL_GEMINI_2_0_PRO, create_runner
 
 
 def topological_sort(
-    tasks: List[Dict], dependencies: Dict[str, List[str]]
-) -> List[Dict]:
+    tasks: list[dict], dependencies: dict[str, list[str]]
+) -> list[dict]:
     """
     Perform a topological sort on tasks based on dependencies.
 
@@ -58,7 +58,7 @@ def topological_sort(
         return tasks
 
 
-def plan_sequence(tasks: List[Dict], tool_context: Any = None) -> Dict:
+def plan_sequence(tasks: list[dict], tool_context: Any = None) -> dict:
     """
     Plan an optimal implementation sequence for tasks.
 
@@ -109,7 +109,7 @@ clearly to the user, explaining the reasoning behind the ordering.""",
 sequence_planner_runner = create_runner(sequence_planner_agent)
 
 
-async def plan_sequence_async(tasks: List[Dict]) -> Dict:
+async def plan_sequence_async(tasks: list[dict]) -> dict:
     """
     Plan an implementation sequence asynchronously using the sequence planner agent.
 

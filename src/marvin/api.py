@@ -6,7 +6,6 @@ Exposes the Marvin agents through a FastAPI server for remote access.
 
 import os
 import tempfile
-from typing import List, Optional
 
 import uvicorn
 from fastapi import FastAPI, File, HTTPException, UploadFile
@@ -26,13 +25,13 @@ class ProcessResponse(BaseModel):
     """Response model for processing requests"""
 
     status: str
-    results: Optional[List[str]] = None
-    error_message: Optional[str] = None
+    results: list[str] | None = None
+    error_message: str | None = None
 
 
 @app.post("/process", response_model=ProcessResponse)
 async def process_prd_api(
-    prd_file: UploadFile = File(...), codebase_zip: Optional[UploadFile] = File(None)
+    prd_file: UploadFile = File(...), codebase_zip: UploadFile | None = File(None)
 ):
     """
     Process a PRD file and optional codebase zip to generate AI coding task templates.
@@ -81,7 +80,7 @@ async def process_prd_api(
             )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e
 
     finally:
         # Clean up temporary files

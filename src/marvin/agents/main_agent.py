@@ -8,7 +8,6 @@ PRD documents into AI-Coding-Task templates.
 
 import asyncio
 import os
-from typing import Dict
 
 from google.adk.agents import Agent
 from google.adk.tools import agent_tool
@@ -54,7 +53,7 @@ Use the Sequence Planner Agent for arranging tasks in optimal order.""",
 main_agent_runner = create_runner(main_agent)
 
 
-async def process_prd_async(prd_path: str, codebase_path: str = None) -> Dict:
+async def process_prd_async(prd_path: str, codebase_path: str = None) -> dict:
     """
     Process a PRD file asynchronously using the main Marvin agent.
 
@@ -96,7 +95,7 @@ async def process_prd_async(prd_path: str, codebase_path: str = None) -> Dict:
     return {"status": "success", "results": results}
 
 
-def process_prd(prd_path: str, codebase_path: str = None) -> Dict:
+def process_prd(prd_path: str, codebase_path: str = None) -> dict:
     """
     Synchronous wrapper for process_prd_async.
 

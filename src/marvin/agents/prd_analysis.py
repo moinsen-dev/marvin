@@ -6,7 +6,7 @@ and extracting features, requirements, and dependencies.
 """
 
 import os
-from typing import Any, Dict
+from typing import Any
 
 from google.adk.agents import Agent
 from google.genai.types import Content, Part
@@ -27,11 +27,11 @@ def extract_prd_content(prd_path: str) -> str:
     if not os.path.exists(prd_path):
         raise FileNotFoundError(f"PRD file not found at {prd_path}")
 
-    with open(prd_path, "r") as f:
+    with open(prd_path) as f:
         return f.read()
 
 
-def analyze_prd(prd_content: str, tool_context: Any = None) -> Dict:
+def analyze_prd(prd_content: str, tool_context: Any = None) -> dict:
     """
     Analyze a PRD and extract features, requirements, and dependencies.
 
@@ -67,7 +67,7 @@ to extract the relevant information. Present the results clearly to the user, hi
 prd_analysis_runner = create_runner(prd_analysis_agent)
 
 
-async def analyze_prd_async(prd_path: str) -> Dict:
+async def analyze_prd_async(prd_path: str) -> dict:
     """
     Analyze a PRD file asynchronously using the PRD analysis agent.
 

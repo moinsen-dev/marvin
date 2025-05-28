@@ -38,7 +38,7 @@ def create_runner(agent: Agent, session_id: str = DEFAULT_SESSION_ID) -> Runner:
         session_service.get_session(
             app_name=APP_NAME, user_id=USER_ID, session_id=session_id
         )
-    except:
+    except Exception:
         # Session doesn't exist, create it
         session_service.create_session(
             app_name=APP_NAME, user_id=USER_ID, session_id=session_id
