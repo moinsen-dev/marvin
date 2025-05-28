@@ -1,0 +1,209 @@
+name: Changelog Management
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to generate changelog for'
+        required: false
+        type: string
+
+jobs:
+  check-changelog-entry:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for changelog entry
+        id: changelog_check
+        run: |
+          # Skip check for certain labels
+          SKIP_LABELS=("dependencies" "documentation" "ci/cd" "no-changelog")
+          
+          LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+          
+          for label in "${SKIP_LABELS[@]}"; do
+            if [[ ",$LABELS," == *",$label,"* ]]; then
+              echo "Skipping changelog check due to label: $label"
+              echo "skip=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          done
+          
+          # Check if CHANGELOG.md was modified
+          git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -q "CHANGELOG.md"
+          if [ $? -eq 0 ]; then
+            echo "CHANGELOG.md has been updated ✅"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGELOG.md has not been updated ❌"
+            echo "skip=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+      - name: Comment on PR
+        if: failure() && steps.changelog_check.outputs.skip != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `
+            ⚠️ **Missing Changelog Entry**
+            
+            This PR appears to contain changes that should be documented in the CHANGELOG.md file.
+            
+            Please add an entry under the "Unreleased" section with your changes categorized as:
+            - **Added** for new features
+            - **Changed** for changes in existing functionality
+            - **Fixed** for bug fixes
+            - **Removed** for removed features
+            - **Security** for vulnerability fixes
+            
+            If this PR doesn't require a changelog entry, please add one of these labels:
+            - \`dependencies\` - for dependency updates
+            - \`documentation\` - for documentation-only changes
+            - \`ci/cd\` - for CI/CD changes
+            - \`no-changelog\` - for other changes that don't need changelog entries
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  generate-changelog:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate changelog from commits
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          
+          # If no version specified, use "Unreleased"
+          if [ -z "$VERSION" ]; then
+            VERSION="Unreleased"
+            SINCE_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          else
+            # Find the previous version tag
+            SINCE_TAG=$(git tag -l "v*" | grep -v "v$VERSION" | sort -V | tail -1)
+          fi
+          
+          echo "Generating changelog for version: $VERSION"
+          echo "Since tag: ${SINCE_TAG:-beginning}"
+          
+          # Initialize sections
+          ADDED=""
+          CHANGED=""
+          FIXED=""
+          REMOVED=""
+          SECURITY=""
+          BREAKING=""
+          
+          # Parse commits
+          if [ -z "$SINCE_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"%s|%h|%an" --no-merges)
+          else
+            COMMITS=$(git log ${SINCE_TAG}..HEAD --pretty=format:"%s|%h|%an" --no-merges)
+          fi
+          
+          while IFS='|' read -r message hash author; do
+            # Skip merge commits
+            [[ "$message" =~ ^Merge ]] && continue
+            
+            # Categorize based on conventional commits
+            if [[ "$message" =~ ^feat(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^feat(\(.+\))?: //')
+              ADDED="${ADDED}- ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ ^fix(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^fix(\(.+\))?: //')
+              FIXED="${FIXED}- ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ ^docs(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^docs(\(.+\))?: //')
+              CHANGED="${CHANGED}- Documentation: ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ ^style(\(.+\))?: ]]; then
+              continue  # Skip style commits
+            elif [[ "$message" =~ ^refactor(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^refactor(\(.+\))?: //')
+              CHANGED="${CHANGED}- Refactor: ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ ^perf(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^perf(\(.+\))?: //')
+              CHANGED="${CHANGED}- Performance: ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ ^test(\(.+\))?: ]]; then
+              continue  # Skip test commits
+            elif [[ "$message" =~ ^chore(\(.+\))?: ]]; then
+              continue  # Skip chore commits
+            elif [[ "$message" =~ ^security(\(.+\))?: ]]; then
+              desc=$(echo "$message" | sed -E 's/^security(\(.+\))?: //')
+              SECURITY="${SECURITY}- ${desc} ([${hash}](../../commit/${hash})) by @${author}\n"
+            elif [[ "$message" =~ BREAKING.CHANGE ]]; then
+              BREAKING="${BREAKING}- ${message} ([${hash}](../../commit/${hash})) by @${author}\n"
+            fi
+          done <<< "$COMMITS"
+          
+          # Generate changelog entry
+          {
+            echo "## [$VERSION] - $(date +%Y-%m-%d)"
+            echo ""
+            
+            if [ -n "$BREAKING" ]; then
+              echo "### ⚠️ Breaking Changes"
+              echo -e "$BREAKING"
+            fi
+            
+            if [ -n "$SECURITY" ]; then
+              echo "### Security"
+              echo -e "$SECURITY"
+            fi
+            
+            if [ -n "$ADDED" ]; then
+              echo "### Added"
+              echo -e "$ADDED"
+            fi
+            
+            if [ -n "$CHANGED" ]; then
+              echo "### Changed"
+              echo -e "$CHANGED"
+            fi
+            
+            if [ -n "$FIXED" ]; then
+              echo "### Fixed"
+              echo -e "$FIXED"
+            fi
+            
+            if [ -n "$REMOVED" ]; then
+              echo "### Removed"
+              echo -e "$REMOVED"
+            fi
+          } > generated_changelog.md
+          
+          echo "Generated changelog:"
+          cat generated_changelog.md
+
+      - name: Create PR with changelog
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: "docs: Update changelog for ${{ github.event.inputs.version || 'unreleased' }}"
+          body: |
+            This PR updates the changelog with entries generated from recent commits.
+            
+            Please review and adjust the entries as needed before merging.
+          branch: changelog-${{ github.event.inputs.version || 'unreleased' }}
+          commit-message: "docs: Update changelog for ${{ github.event.inputs.version || 'unreleased' }}"
+          add-paths: |
+            CHANGELOG.md
+            generated_changelog.md

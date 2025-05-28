@@ -141,10 +141,45 @@ nav:
     - Installation: getting-started/installation.md
     - Quick Start: getting-started/quickstart.md
     - Configuration: getting-started/configuration.md
+  - Use Cases:
+    - Overview: use-cases/index.md
+    - Startup MVP: use-cases/startup-mvp.md
+    - API Development: use-cases/api-development.md
+    - Enterprise Features: use-cases/enterprise-features.md
+    - Frontend Apps: use-cases/frontend-apps.md
+    - Microservices: use-cases/microservices.md
+    - Database Design: use-cases/database-design.md
+    - Testing Strategy: use-cases/testing-strategy.md
+    - DevOps & CI/CD: use-cases/devops-cicd.md
+  - Guides:
+    - AI Coding Improvements: guides/ai-coding-improvements.md
+    - Writing Effective PRDs: guides/writing-effective-prds.md
+    - Best Practices: guides/best-practices.md
+    - Team Workflows: guides/team-workflows.md
+    - AI Tool Integration: guides/ai-integration.md
+  - Case Studies:
+    - Before & After: case-studies/before-after-comparison.md
+    - Success Stories: case-studies/success-stories.md
   - User Guide:
     - Processing PRDs: user-guide/processing-prds.md
     - Understanding Templates: user-guide/templates.md
     - CLI Usage: user-guide/cli-usage.md
+  - Architecture:
+    - Overview: architecture/overview.md
+    - Domain Models: architecture/domain-models.md
+    - Agents: architecture/agents.md
+    - Adapters: architecture/adapters.md
+  - API Reference:
+    - REST API: api/rest-api.md
+    - Python SDK: api/python-sdk.md
+    - MCP Server: api/mcp-server.md
+  - Examples:
+    - Example PRDs: examples/prd-examples.md
+    - Generated Templates: examples/generated-templates.md
+  - Developer Guide:
+    - Contributing: developer-guide/contributing.md
+    - Testing: developer-guide/testing.md
+    - Architecture Decisions: developer-guide/architecture-decisions.md
 
 # Extra configuration
 extra:
