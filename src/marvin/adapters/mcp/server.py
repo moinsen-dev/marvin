@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Any
 
 import websockets
-from websockets.server import WebSocketServerProtocol
+from websockets.legacy.server import WebSocketServerProtocol
 
 from marvin import __version__
 
@@ -230,7 +230,7 @@ class MCPServer:
                     data = json.loads(message)
                     await self.process_message(websocket, data)
                 except json.JSONDecodeError:
-                    logger.error(f"Invalid JSON message: {message}")
+                    logger.error(f"Invalid JSON message: {message!r}")
                     await websocket.send(
                         json.dumps(
                             {
@@ -252,7 +252,7 @@ class MCPServer:
         logger.info(f"Marvin MCP Server v{__version__}")
 
         # Start WebSocket server
-        async with websockets.serve(self.handler, self.host, self.port):
+        async with websockets.serve(self.handler, self.host, self.port):  # type: ignore
             # Server runs until it is stopped
             await asyncio.Future()  # Runs forever
 

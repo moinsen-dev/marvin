@@ -33,7 +33,7 @@ def scan_directory(
     if ignore_dirs is None:
         ignore_dirs = [".git", ".venv", "node_modules", "__pycache__"]
 
-    result = {}
+    result: dict[str, Any] = {}
 
     for root, dirs, files in os.walk(directory_path):
         # Skip ignored directories

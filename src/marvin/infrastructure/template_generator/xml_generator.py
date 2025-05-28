@@ -245,8 +245,8 @@ class XMLTemplateGenerator:
         return f"""<Story id="{feature.id}_story_01"
                 role="User"
                 goal="to be able to {feature.name}"
-                benefit="to {feature.description.split('.')[0] if '.' in feature.description else feature.description}"
-                acceptanceCriteria="{'; '.join(feature.requirements[:3]) if feature.requirements else 'TBD'}"/>"""
+                benefit="to {feature.description.split(".")[0] if "." in feature.description else feature.description}"
+                acceptanceCriteria="{"; ".join(feature.requirements[:3]) if feature.requirements else "TBD"}"/>"""
 
     def _generate_languages(self, codebase: Codebase) -> str:
         """Generates XML for programming languages.

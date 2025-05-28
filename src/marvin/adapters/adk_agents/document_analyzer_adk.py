@@ -106,10 +106,6 @@ class DocumentAnalyzerADKAgent(LlmAgent):
             # tools=[], # Add any ADK tools if needed later
             **kwargs,
         )
-        self.config = config or {}
-        self.logger.info(
-            f"Initialized DocumentAnalyzerADKAgent '{self.name}' with model '{self.model}'"
-        )
 
     async def _read_document_content(
         self, document_path: str, tool_context: Any | None = None
@@ -195,20 +191,14 @@ class DocumentAnalyzerADKAgent(LlmAgent):
 
             prd.features = extracted_features
 
-            self.logger.info(
-                f"Successfully parsed LLM response into PRD '{prd.title}' with {len(extracted_features)} features."
-            )
+            # Successfully parsed LLM response
             return prd, extracted_features
 
         except json.JSONDecodeError as e:
-            self.logger.error(
-                f"Failed to decode LLM JSON output: {str(e)}\nOutput was: {llm_output}"
-            )
+            # Failed to decode LLM JSON output
             raise ValueError(f"LLM output was not valid JSON: {str(e)}") from e
-        except Exception as e:
-            self.logger.error(
-                f"Error parsing LLM response into domain models: {str(e)}"
-            )
+        except Exception:
+            # Error parsing LLM response
             raise
 
     async def analyze_prd_file(
