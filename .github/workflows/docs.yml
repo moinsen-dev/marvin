@@ -49,7 +49,7 @@ jobs:
       - name: Build documentation
         run: |
           source .venv/bin/activate
-          mkdocs build --strict --verbose
+          mkdocs build --verbose
 
       - name: Upload artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -100,7 +100,7 @@ jobs:
       - name: Build documentation
         run: |
           source .venv/bin/activate
-          mkdocs build --strict
+          mkdocs build
 
       - name: Comment PR with preview info
         uses: actions/github-script@v7

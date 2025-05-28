@@ -12,7 +12,6 @@ copyright: Copyright &copy; 2024 Marvin Team
 # Theme configuration
 theme:
   name: material
-  custom_dir: docs/overrides
   language: en
   features:
     - announce.dismiss
@@ -58,8 +57,8 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/favicon.png
-  logo: assets/logo.png
+  # favicon: assets/favicon.png
+  # logo: assets/logo.png
   icon:
     repo: fontawesome/brands/github
 
@@ -146,25 +145,6 @@ nav:
     - Processing PRDs: user-guide/processing-prds.md
     - Understanding Templates: user-guide/templates.md
     - CLI Usage: user-guide/cli-usage.md
-    - API Usage: user-guide/api-usage.md
-    - AI Assistant Integration: user-guide/ai-integration.md
-  - Architecture:
-    - Overview: architecture/overview.md
-    - Hexagonal Architecture: architecture/hexagonal.md
-    - Agents System: architecture/agents.md
-    - Data Flow: architecture/data-flow.md
-  - Developer Guide:
-    - Development Setup: developer-guide/setup.md
-    - TDD Workflow: developer-guide/tdd-workflow.md
-    - Testing Guidelines: developer-guide/testing.md
-    - Code Quality: developer-guide/code-quality.md
-    - Contributing: developer-guide/contributing.md
-  - API Reference:
-    - Core Domain: api/domain.md
-    - Agents: api/agents.md
-    - Use Cases: api/use-cases.md
-    - REST API: api/rest-api.md
-  - Changelog: changelog.md
 
 # Extra configuration
 extra:
