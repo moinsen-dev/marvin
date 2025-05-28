@@ -39,7 +39,7 @@ Use the GitHub Actions workflow to test the release on Test PyPI:
 
 Test the package from Test PyPI:
 ```bash
-pip install -i https://test.pypi.org/simple/ marvin-prd
+pip install -i https://test.pypi.org/simple/ marvin
 marvin --version
 ```
 
@@ -58,7 +58,7 @@ This will automatically trigger the PyPI publication workflow.
 
 ```bash
 # Install from PyPI
-pip install marvin-prd
+pip install marvin
 
 # Verify installation
 marvin --version
@@ -117,7 +117,7 @@ version = "0.1.0"  # Update this
 
 ### Package Name Already Taken
 
-If `marvin` is taken on PyPI, we use `marvin-prd` as the package name.
+If `marvin` is taken on PyPI, we use `marvin` as the package name.
 
 ### Build Errors
 

@@ -1,7 +1,7 @@
-# Marvin PRD - Transform PRDs into AI-Ready Coding Tasks
+# Marvin - Transform PRDs into AI-Ready Coding Tasks
 
-[![PyPI version](https://badge.fury.io/py/marvin-prd.svg)](https://pypi.org/project/marvin-prd/)
-[![Python](https://img.shields.io/pypi/pyversions/marvin-prd.svg)](https://pypi.org/project/marvin-prd/)
+[![PyPI version](https://badge.fury.io/py/marvin.svg)](https://pypi.org/project/marvin/)
+[![Python](https://img.shields.io/pypi/pyversions/marvin.svg)](https://pypi.org/project/marvin/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://moinsen-dev.github.io/marvin/)
 [![GitHub](https://img.shields.io/github/stars/moinsen-dev/marvin?style=social)](https://github.com/moinsen-dev/marvin)
@@ -12,7 +12,7 @@
 
 ```bash
 # Install Marvin
-pip install marvin-prd
+pip install marvin
 
 # Process your first PRD
 marvin process feature.md --output ./tasks/
@@ -81,7 +81,7 @@ Marvin takes your PRDs and automatically:
 
 ### Install from PyPI
 ```bash
-pip install marvin-prd
+pip install marvin
 ```
 
 ### Install from Source

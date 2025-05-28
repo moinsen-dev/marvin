@@ -1,5 +1,5 @@
 [project]
-name = "marvin-prd"
+name = "marvin"
 version = "0.1.0"
 description = "An intelligent tool for converting PRDs into structured AI-Coding-Tasks"
 authors = [{ name = "Moinsen Dev Team", email = "hello@moinsen.dev" }]

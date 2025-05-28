@@ -1225,7 +1225,7 @@ wheels = [
 ]
 
 [[package]]
-name = "marvin-prd"
+name = "marvin"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
