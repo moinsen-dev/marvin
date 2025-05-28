@@ -25,6 +25,7 @@ dependencies = [
     "websockets>=15.0.1",
     "loguru>=0.7.3",
     "types-pyyaml>=6.0.12.20250402",
+    "networkx>=3.4.2",
 ]
 
 [project.optional-dependencies]

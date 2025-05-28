@@ -1,86 +1,135 @@
-"""Command Line Interface for Marvin."""
+"""
+Command-line interface for Marvin.
 
-from typing import Optional
+This module provides a command-line interface for interacting with Marvin.
+"""
 
-import typer
-from rich.console import Console
+import argparse
+import os
+import sys
+from typing import List, Optional
 
-from marvin import __version__
-from marvin.adapters.cli.commands import (
-    analyze_prd_command,
-    serve_api_command,
-    serve_mcp_command,
-)
-from marvin.logging import get_logger
-
-app = typer.Typer(
-    name="marvin",
-    help="Marvin - The intelligent task generator for AI coding assistants",
-    add_completion=False,
-)
-
-console = Console()
-logger = get_logger("cli")
+from marvin.agents.main_agent import process_prd
+from marvin.api import start_server
 
 
-def _print_version(value: bool) -> None:
-    """Displays the version and exits the program."""
-    if value:
-        console.print(f"Marvin version: {__version__}")
-        logger.info(f"Version {__version__} displayed")
-        raise typer.Exit()
+def parse_args(args: List[str]) -> argparse.Namespace:
+    """
+    Parse command-line arguments.
+
+    Args:
+        args: Command-line arguments
+
+    Returns:
+        Parsed arguments
+    """
+    parser = argparse.ArgumentParser(
+        description="Marvin - Convert PRDs into AI-Coding-Tasks"
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Command to run")
+
+    # Process command
+    process_parser = subparsers.add_parser("process", help="Process a PRD file")
+    process_parser.add_argument("prd_file", help="Path to the PRD file to process")
+    process_parser.add_argument(
+        "--codebase", "-c", help="Path to the codebase directory (optional)"
+    )
+    process_parser.add_argument(
+        "--output", "-o", help="Output directory for generated templates (optional)"
+    )
+
+    # Server command
+    server_parser = subparsers.add_parser("server", help="Start the API server")
+    server_parser.add_argument(
+        "--host", default="0.0.0.0", help="Host to bind to (default: 0.0.0.0)"
+    )
+    server_parser.add_argument(
+        "--port", type=int, default=8000, help="Port to bind to (default: 8000)"
+    )
+
+    return parser.parse_args(args)
 
 
-@app.callback()
-def callback(
-    version: bool = typer.Option(
-        None,
-        "--version",
-        "-v",
-        help="Displays the version and exits the program.",
-        callback=_print_version,
-        is_eager=True,
-    ),
-) -> None:
-    """Marvin - The intelligent task generator for AI coding assistants."""
-    pass
+def save_results(results: List[str], output_dir: str) -> None:
+    """
+    Save processing results to files.
+
+    Args:
+        results: List of result strings
+        output_dir: Directory to save results to
+    """
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Save raw results
+    with open(os.path.join(output_dir, "results.txt"), "w") as f:
+        for i, result in enumerate(results):
+            f.write(f"=== Result {i + 1} ===\n")
+            f.write(result)
+            f.write("\n\n")
+
+    # TODO: Save structured results (templates, sequence plan) in appropriate formats
+
+    print(f"Results saved to {output_dir}")
 
 
-@app.command("analyze")
-def analyze_prd(
-    prd_path: str = typer.Argument(..., help="Path to the PRD document"),
-    codebase_path: Optional[str] = typer.Option(
-        None, "--codebase", "-c", help="Path to the existing codebase (optional)"
-    ),
-    output_dir: str = typer.Option(
-        "./marvin-output", "--output", "-o", help="Output directory for tasks"
-    ),
-) -> None:
-    """Analyzes a PRD and generates AI coding tasks."""
-    logger.info(f"Analyzing PRD: {prd_path}")
-    analyze_prd_command(prd_path, codebase_path, output_dir)
-    logger.success(f"Analysis complete. Output saved to {output_dir}")
+def main(args: Optional[List[str]] = None) -> int:
+    """
+    Main entry point for the CLI.
 
+    Args:
+        args: Command-line arguments (defaults to sys.argv[1:])
 
-@app.command("serve-api")
-def serve_api(
-    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host address"),
-    port: int = typer.Option(8000, "--port", "-p", help="Port"),
-) -> None:
-    """Starts the API server."""
-    logger.info(f"Starting API server on {host}:{port}")
-    serve_api_command(host, port)
+    Returns:
+        Exit code
+    """
+    if args is None:
+        args = sys.argv[1:]
 
+    parsed_args = parse_args(args)
 
-@app.command("serve-mcp")
-def serve_mcp(
-    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host address"),
-    port: int = typer.Option(9000, "--port", "-p", help="Port"),
-) -> None:
-    """Starts the MCP server."""
-    logger.info(f"Starting MCP server on {host}:{port}")
-    serve_mcp_command(host, port)
+    if parsed_args.command == "process":
+        # Validate inputs
+        if not os.path.exists(parsed_args.prd_file):
+            print(f"Error: PRD file not found: {parsed_args.prd_file}")
+            return 1
+
+        if parsed_args.codebase and not os.path.isdir(parsed_args.codebase):
+            print(f"Error: Codebase directory not found: {parsed_args.codebase}")
+            return 1
+
+        # Process the PRD
+        print(f"Processing PRD: {parsed_args.prd_file}")
+        if parsed_args.codebase:
+            print(f"Using codebase: {parsed_args.codebase}")
+
+        result = process_prd(parsed_args.prd_file, parsed_args.codebase)
+
+        if result["status"] == "success":
+            # Print results
+            print("\nResults:")
+            for i, r in enumerate(result["results"]):
+                print(f"\n=== Result {i + 1} ===")
+                print(r)
+
+            # Save results if output directory specified
+            if parsed_args.output:
+                save_results(result["results"], parsed_args.output)
+
+            return 0
+        else:
+            print(f"Error: {result.get('error_message', 'Unknown error')}")
+            return 1
+
+    elif parsed_args.command == "server":
+        print(f"Starting server on {parsed_args.host}:{parsed_args.port}")
+        start_server(host=parsed_args.host, port=parsed_args.port)
+        return 0
+
+    else:
+        print("Error: No command specified. Use --help for available commands.")
+        return 1
 
 
 if __name__ == "__main__":
-    app()
+    sys.exit(main())

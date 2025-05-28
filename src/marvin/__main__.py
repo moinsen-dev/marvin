@@ -1,6 +1,8 @@
-"""Entry point for the Marvin package."""
+"""Main entry point for Marvin."""
 
-from marvin.cli import app
+import sys
+
+from marvin.cli import main
 
 if __name__ == "__main__":
-    app()
+    sys.exit(main())
