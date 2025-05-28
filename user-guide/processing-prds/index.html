@@ -1,0 +1,1862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Intelligent PRD to AI-Coding-Task Converter">
+      
+      
+        <meta name="author" content="Marvin Team">
+      
+      
+        <link rel="canonical" href="https://moinsen-dev.github.io/marvin/user-guide/processing-prds/">
+      
+      
+        <link rel="prev" href="../../getting-started/configuration/">
+      
+      
+        <link rel="next" href="../templates/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Processing PRDs - Marvin Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-XXXXXXXXXX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-XXXXXXXXXX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#processing-prds" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Marvin Documentation" class="md-header__button md-logo" aria-label="Marvin Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Marvin Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Processing PRDs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-blue" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-blue" data-md-color-accent="orange"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/moinsen-dev/marvin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    marvin
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Marvin Documentation" class="md-nav__button md-logo" aria-label="Marvin Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Marvin Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/moinsen-dev/marvin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    marvin
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../getting-started/installation/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    User Guide
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Processing PRDs
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing PRDs
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-prd-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Supported PRD Formats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Supported PRD Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#markdown-md" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Markdown (.md)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plain-text-txt" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Plain Text (.txt)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rich-text-rtf" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Rich Text (.rtf)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-word-docx" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Microsoft Word (.docx)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prd-quality-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 PRD Quality Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 PRD Quality Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excellent-prd-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excellent PRD Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-makes-this-excellent" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Makes This Excellent:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Processing Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Processing Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-analysis-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Understanding Analysis Output
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Understanding Analysis Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#console-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Console Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary File
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codebase-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Codebase Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Codebase Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-existing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyzing Existing Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-task-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Task Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Alignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimization-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Optimization Tips
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Optimization Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#better-requirements-better-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Better Requirements = Better Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-context-and-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include Context and Constraints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effective-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effective User Stories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-issues-and-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 Common Issues and Solutions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Common Issues and Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#poor-task-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Poor Task Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Best Practices Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Best Practices Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Do This
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avoid-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Avoid This
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Understanding Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-prd-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Supported PRD Formats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Supported PRD Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#markdown-md" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Markdown (.md)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plain-text-txt" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Plain Text (.txt)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rich-text-rtf" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Rich Text (.rtf)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-word-docx" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Microsoft Word (.docx)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prd-quality-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 PRD Quality Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 PRD Quality Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excellent-prd-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excellent PRD Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-makes-this-excellent" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Makes This Excellent:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Processing Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Processing Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-analysis-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Understanding Analysis Output
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Understanding Analysis Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#console-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Console Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary File
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codebase-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Codebase Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Codebase Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-existing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyzing Existing Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-task-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Task Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Alignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimization-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Optimization Tips
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Optimization Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#better-requirements-better-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Better Requirements = Better Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-context-and-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include Context and Constraints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effective-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effective User Stories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-issues-and-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 Common Issues and Solutions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Common Issues and Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#poor-task-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Poor Task Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Best Practices Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Best Practices Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Do This
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avoid-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Avoid This
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/moinsen-dev/marvin/edit/main/docs/user-guide/processing-prds.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/moinsen-dev/marvin/raw/main/docs/user-guide/processing-prds.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="processing-prds">Processing PRDs<a class="headerlink" href="#processing-prds" title="Permanent link">&para;</a></h1>
+<p>Learn how to convert your Product Requirement Documents into <abbr title="Artificial Intelligence">AI</abbr>-ready coding tasks with Marvin.</p>
+<h2 id="supported-prd-formats">📋 <strong>Supported <abbr title="Product Requirement Document">PRD</abbr> Formats</strong><a class="headerlink" href="#supported-prd-formats" title="Permanent link">&para;</a></h2>
+<p>Marvin can process PRDs in various formats:</p>
+<h3 id="markdown-md">✅ <strong>Markdown (.md)</strong><a class="headerlink" href="#markdown-md" title="Permanent link">&para;</a></h3>
+<p>Most common format, excellent structure support:</p>
+<div class="language-markdown highlight"><span class="filename">feature-request.md</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gh"># Feature Name</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gu">## Overview</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Brief description of the feature
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gu">## Requirements</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">-</span><span class="w"> </span>Functional requirement 1
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">-</span><span class="w"> </span>Functional requirement 2
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gu">## Technical Constraints</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">-</span><span class="w"> </span>Performance requirements
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">-</span><span class="w"> </span>Security considerations
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gu">## Acceptance Criteria</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">- [ ]</span> Criterion 1
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">- [ ]</span> Criterion 2
+</span></code></pre></div>
+<h3 id="plain-text-txt">✅ <strong>Plain Text (.txt)</strong><a class="headerlink" href="#plain-text-txt" title="Permanent link">&para;</a></h3>
+<p>Simple format, good for quick notes:</p>
+<div class="language-text highlight"><span class="filename">feature-request.txt</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Feature: User Authentication
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Requirements:
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>- Login with email/password
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- Password reset functionality
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- Session management
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- Two-factor authentication
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Technical:
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>- JWT tokens
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>- BCrypt password hashing
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>- Rate limiting
+</span></code></pre></div>
+<h3 id="rich-text-rtf">✅ <strong>Rich Text (.rtf)</strong><a class="headerlink" href="#rich-text-rtf" title="Permanent link">&para;</a></h3>
+<p>Formatted documents from word processors:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{\rtf1\ansi\deff0 {\fonttbl {\f0 Times New Roman;}}
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>\f0\fs24 Feature: Dashboard Analytics\par
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Requirements:\par
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>- Real-time data visualization\par
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>- Export capabilities\par
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>}
+</span></code></pre></div>
+<h3 id="microsoft-word-docx">✅ <strong>Microsoft Word (.docx)</strong><a class="headerlink" href="#microsoft-word-docx" title="Permanent link">&para;</a></h3>
+<p>Corporate standard format:</p>
+<ul>
+<li>Full formatting support</li>
+<li>Tables and lists preserved</li>
+<li>Images and diagrams extracted</li>
+<li>Comments and tracked changes processed</li>
+</ul>
+<hr />
+<h2 id="prd-quality-guidelines">🎯 <strong><abbr title="Product Requirement Document">PRD</abbr> Quality Guidelines</strong><a class="headerlink" href="#prd-quality-guidelines" title="Permanent link">&para;</a></h2>
+<h3 id="excellent-prd-structure"><strong>Excellent <abbr title="Product Requirement Document">PRD</abbr> Structure</strong><a class="headerlink" href="#excellent-prd-structure" title="Permanent link">&para;</a></h3>
+<div class="language-markdown highlight"><span class="filename">excellent-prd.md</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gh"># Feature Name: Real-time Chat System</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="gu">## Business Context</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Why this feature matters and its expected impact.
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="gu">## User Stories</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">-</span><span class="w"> </span>As a user, I want to send messages instantly
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">-</span><span class="w"> </span>As a moderator, I need to monitor chat content
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">-</span><span class="w"> </span>As an admin, I want to manage chat rooms
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="gu">## Functional Requirements</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="gu">### Core Messaging</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">-</span><span class="w"> </span>Send/receive text messages in real-time
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">-</span><span class="w"> </span>Support for emoji and basic formatting
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">-</span><span class="w"> </span>Message history persistence (30 days)
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">-</span><span class="w"> </span>Typing indicators
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="gu">### Room Management  </span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="k">-</span><span class="w"> </span>Create public/private chat rooms
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="k">-</span><span class="w"> </span>Invite users to private rooms
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="k">-</span><span class="w"> </span>Room moderation controls
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="k">-</span><span class="w"> </span>User presence indicators
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="gu">## Technical Requirements</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="k">-</span><span class="w"> </span>WebSocket connections for real-time updates
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="k">-</span><span class="w"> </span>Message encryption in transit
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="k">-</span><span class="w"> </span>Database optimization for message history
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="k">-</span><span class="w"> </span>Rate limiting (10 messages/minute per user)
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="k">-</span><span class="w"> </span>Mobile-responsive design
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="gu">## Non-Functional Requirements</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="k">-</span><span class="w"> </span>Response time: &lt; 100ms for message delivery
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="k">-</span><span class="w"> </span>Concurrent users: Support 10,000 simultaneous connections
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="k">-</span><span class="w"> </span>Uptime: 99.9% availability
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="k">-</span><span class="w"> </span>Scalability: Horizontal scaling support
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="gu">## Security Considerations</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="k">-</span><span class="w"> </span>Message content encryption
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="k">-</span><span class="w"> </span>User authentication required
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="k">-</span><span class="w"> </span>Anti-spam mechanisms
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="k">-</span><span class="w"> </span>Content moderation hooks
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="gu">## Acceptance Criteria</span>
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="k">- [ ]</span> Users can join/leave rooms instantly
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="k">- [ ]</span> Messages appear in real-time (&lt; 100ms)
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="k">- [ ]</span> Message history loads quickly (&lt; 2s)
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="k">- [ ]</span> Typing indicators work correctly
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="k">- [ ]</span> Rate limiting prevents spam
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="k">- [ ]</span> Mobile layout works on all devices
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="k">- [ ]</span> Encrypted message transmission
+</span></code></pre></div>
+<h3 id="what-makes-this-excellent"><strong>What Makes This Excellent:</strong><a class="headerlink" href="#what-makes-this-excellent" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Clear Structure</strong> - Easy to parse sections
+✅ <strong>Specific Requirements</strong> - Detailed, measurable criteria<br />
+✅ <strong>Technical Details</strong> - Performance and security specs
+✅ <strong>User Perspective</strong> - Stories explain the "why"
+✅ <strong>Acceptance Criteria</strong> - Testable outcomes</p>
+<hr />
+<h2 id="processing-commands">🚀 <strong>Processing Commands</strong><a class="headerlink" href="#processing-commands" title="Permanent link">&para;</a></h2>
+<h3 id="basic-processing"><strong>Basic Processing</strong><a class="headerlink" href="#basic-processing" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Process single PRD</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Specify output directory</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md<span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Process multiple PRDs</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>marvin<span class="w"> </span>process<span class="w"> </span>*.md<span class="w"> </span>--output<span class="w"> </span>./all-tasks/
+</span></code></pre></div>
+<h3 id="advanced-processing"><strong>Advanced Processing</strong><a class="headerlink" href="#advanced-processing" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Include codebase analysis</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md<span class="w"> </span>--codebase<span class="w"> </span>./src/<span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Use custom configuration</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md<span class="w"> </span>--config<span class="w"> </span>./team-config.toml
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Specify output format</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md<span class="w"> </span>--format<span class="w"> </span>json<span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Dry run (no files created)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>marvin<span class="w"> </span>process<span class="w"> </span>feature-request.md<span class="w"> </span>--dry-run<span class="w"> </span>--verbose
+</span></code></pre></div>
+<h3 id="batch-processing"><strong>Batch Processing</strong><a class="headerlink" href="#batch-processing" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Process all PRDs in directory</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>marvin<span class="w"> </span>process<span class="w"> </span>./prds/<span class="w"> </span>--output<span class="w"> </span>./tasks/<span class="w"> </span>--recursive
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Process specific file types</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>marvin<span class="w"> </span>process<span class="w"> </span>./docs/<span class="w"> </span>--include<span class="w"> </span><span class="s2">&quot;*.md&quot;</span><span class="w"> </span>--include<span class="w"> </span><span class="s2">&quot;*.txt&quot;</span><span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Exclude certain files</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>marvin<span class="w"> </span>process<span class="w"> </span>./docs/<span class="w"> </span>--exclude<span class="w"> </span><span class="s2">&quot;*draft*&quot;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s2">&quot;*template*&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="understanding-analysis-output">📊 <strong>Understanding Analysis Output</strong><a class="headerlink" href="#understanding-analysis-output" title="Permanent link">&para;</a></h2>
+<p>When you process a <abbr title="Product Requirement Document">PRD</abbr>, Marvin provides detailed analysis:</p>
+<h3 id="console-output"><strong>Console Output</strong><a class="headerlink" href="#console-output" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$<span class="w"> </span>marvin<span class="w"> </span>process<span class="w"> </span>social-feed.md<span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>🔍<span class="w"> </span>Analyzing<span class="w"> </span>PRD:<span class="w"> </span>social-feed.md
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>📋<span class="w"> </span>Extracted<span class="w"> </span><span class="m">12</span><span class="w"> </span>requirements<span class="w"> </span>across<span class="w"> </span><span class="m">4</span><span class="w"> </span>feature<span class="w"> </span>areas
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>🔗<span class="w"> </span>Identified<span class="w"> </span><span class="m">7</span><span class="w"> </span>task<span class="w"> </span>dependencies
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>⚡<span class="w"> </span>Generated<span class="w"> </span><span class="m">6</span><span class="w"> </span>optimized<span class="w"> </span>tasks
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>📁<span class="w"> </span>Output<span class="w"> </span>saved<span class="w"> </span>to:<span class="w"> </span>./tasks/
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>📈<span class="w"> </span>Analysis<span class="w"> </span>Summary:
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">   </span>├──<span class="w"> </span>Features<span class="w"> </span>identified:<span class="w"> </span><span class="m">4</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">   </span>├──<span class="w"> </span>Technical<span class="w"> </span>requirements:<span class="w"> </span><span class="m">8</span><span class="w">  </span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">   </span>├──<span class="w"> </span>Business<span class="w"> </span>requirements:<span class="w"> </span><span class="m">4</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">   </span>├──<span class="w"> </span>Tasks<span class="w"> </span>generated:<span class="w"> </span><span class="m">6</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">   </span>├──<span class="w"> </span>Dependencies<span class="w"> </span>resolved:<span class="w"> </span><span class="m">7</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">   </span>└──<span class="w"> </span>Estimated<span class="w"> </span>total<span class="w"> </span>effort:<span class="w"> </span><span class="m">18</span>-24<span class="w"> </span>hours
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>📋<span class="w"> </span>Generated<span class="w"> </span>Tasks:
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">   </span>├──<span class="w"> </span>task_001_user_posts_data_model.xml<span class="w"> </span><span class="o">(</span>4h<span class="o">)</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">   </span>├──<span class="w"> </span>task_002_engagement_system.xml<span class="w"> </span><span class="o">(</span>3h<span class="o">)</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">   </span>├──<span class="w"> </span>task_003_real_time_updates.xml<span class="w"> </span><span class="o">(</span>5h<span class="o">)</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">   </span>├──<span class="w"> </span>task_004_feed_display_logic.xml<span class="w"> </span><span class="o">(</span>4h<span class="o">)</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">   </span>├──<span class="w"> </span>task_005_mobile_responsive_design.xml<span class="w"> </span><span class="o">(</span>2h<span class="o">)</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">   </span>└──<span class="w"> </span>task_summary.json
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>✅<span class="w"> </span>Ready<span class="w"> </span><span class="k">for</span><span class="w"> </span>AI<span class="w"> </span>coding<span class="w"> </span>assistants!
+</span></code></pre></div>
+<h3 id="summary-file"><strong>Summary File</strong><a class="headerlink" href="#summary-file" title="Permanent link">&para;</a></h3>
+<p>Marvin generates a <code>task_summary.json</code> with analysis details:</p>
+<div class="language-json highlight"><span class="filename">task_summary.json</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;prd_analysis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;source_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;social-feed.md&quot;</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;processed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;total_features&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">&quot;total_requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">&quot;estimated_effort&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18-24 hours&quot;</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task_001&quot;</span><span class="p">,</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User Posts Data Model&quot;</span><span class="p">,</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">      </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;high&quot;</span><span class="p">,</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">      </span><span class="nt">&quot;effort&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3-4 hours&quot;</span><span class="p">,</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;user_auth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;database_setup&quot;</span><span class="p">]</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">  </span><span class="nt">&quot;dependency_graph&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="nt">&quot;task_001&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">    </span><span class="nt">&quot;task_002&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;task_001&quot;</span><span class="p">],</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">    </span><span class="nt">&quot;task_003&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;task_001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;task_002&quot;</span><span class="p">]</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">  </span><span class="nt">&quot;recommendations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">    </span><span class="s2">&quot;Implement tasks in dependency order&quot;</span><span class="p">,</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">    </span><span class="s2">&quot;Consider API rate limiting for engagement features&quot;</span><span class="p">,</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">    </span><span class="s2">&quot;Optimize database queries for feed performance&quot;</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="codebase-integration">🔧 <strong>Codebase Integration</strong><a class="headerlink" href="#codebase-integration" title="Permanent link">&para;</a></h2>
+<h3 id="analyzing-existing-code"><strong>Analyzing Existing Code</strong><a class="headerlink" href="#analyzing-existing-code" title="Permanent link">&para;</a></h3>
+<p>When you include <code>--codebase</code>, Marvin analyzes your existing code structure:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>marvin<span class="w"> </span>process<span class="w"> </span>new-feature.md<span class="w"> </span>--codebase<span class="w"> </span>./src/<span class="w"> </span>--output<span class="w"> </span>./tasks/
+</span></code></pre></div>
+<p><strong>What Marvin Analyzes:</strong>
+- 🏗️ <strong>Architecture patterns</strong> (MVC, microservices, etc.)
+- 📁 <strong>File structure</strong> and organization
+- 🔌 <strong>Frameworks and libraries</strong> in use
+- 🗃️ <strong>Database models</strong> and schemas
+- 🛠️ <strong><abbr title="Application Programming Interface">API</abbr> patterns</strong> and conventions
+- 🧪 <strong>Testing approaches</strong> and frameworks</p>
+<h3 id="enhanced-task-generation"><strong>Enhanced Task Generation</strong><a class="headerlink" href="#enhanced-task-generation" title="Permanent link">&para;</a></h3>
+<p>With codebase analysis, tasks become more specific:</p>
+<div class="language-xml highlight"><span class="filename">Without codebase analysis</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&lt;requirement&gt;</span>Create<span class="w"> </span>user<span class="w"> </span>authentication<span class="w"> </span>API<span class="nt">&lt;/requirement&gt;</span>
+</span></code></pre></div>
+<div class="language-xml highlight"><span class="filename">With codebase analysis</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">&lt;requirement&gt;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>Extend<span class="w"> </span>existing<span class="w"> </span>FastAPI<span class="w"> </span>auth<span class="w"> </span>module<span class="w"> </span>at<span class="w"> </span>src/auth/
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>following<span class="w"> </span>the<span class="w"> </span>established<span class="w"> </span>JWT<span class="w"> </span>pattern<span class="w"> </span>used<span class="w"> </span>in<span class="w"> </span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>src/auth/models.py<span class="w"> </span>and<span class="w"> </span>src/auth/routes.py
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nt">&lt;/requirement&gt;</span>
+</span></code></pre></div>
+<h3 id="architecture-alignment"><strong>Architecture Alignment</strong><a class="headerlink" href="#architecture-alignment" title="Permanent link">&para;</a></h3>
+<p>Marvin ensures new tasks fit your existing architecture:</p>
+<div class="admonition example">
+<p class="admonition-title">Django Project Detection</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">&lt;implementation_notes&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Use<span class="w"> </span>Django<span class="w"> </span>models<span class="w"> </span>extending<span class="w"> </span>AbstractUser<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Follow<span class="w"> </span>existing<span class="w"> </span>serializer<span class="w"> </span>patterns<span class="w"> </span>in<span class="w"> </span>api/serializers/<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Add<span class="w"> </span>tests<span class="w"> </span>to<span class="w"> </span>tests/test_auth.py<span class="w"> </span>following<span class="w"> </span>pytest<span class="w"> </span>conventions<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Use<span class="w"> </span>Django<span class="w"> </span>REST<span class="w"> </span>framework<span class="w"> </span>viewsets<span class="w"> </span>for<span class="w"> </span>consistency<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nt">&lt;/implementation_notes&gt;</span>
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">React Project Detection</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">&lt;implementation_notes&gt;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Create<span class="w"> </span>components<span class="w"> </span>in<span class="w"> </span>src/components/<span class="w"> </span>following<span class="w"> </span>existing<span class="w"> </span>structure<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Use<span class="w"> </span>existing<span class="w"> </span>Redux<span class="w"> </span>store<span class="w"> </span>pattern<span class="w"> </span>for<span class="w"> </span>state<span class="w"> </span>management<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Follow<span class="w"> </span>TypeScript<span class="w"> </span>interfaces<span class="w"> </span>defined<span class="w"> </span>in<span class="w"> </span>src/types/<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">&lt;note&gt;</span>Add<span class="w"> </span>tests<span class="w"> </span>using<span class="w"> </span>existing<span class="w"> </span>Jest<span class="w"> </span>+<span class="w"> </span>React<span class="w"> </span>Testing<span class="w"> </span>Library<span class="w"> </span>setup<span class="nt">&lt;/note&gt;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nt">&lt;/implementation_notes&gt;</span>
+</span></code></pre></div>
+</div>
+<hr />
+<h2 id="optimization-tips">📈 <strong>Optimization Tips</strong><a class="headerlink" href="#optimization-tips" title="Permanent link">&para;</a></h2>
+<h3 id="better-requirements-better-tasks"><strong>Better Requirements = Better Tasks</strong><a class="headerlink" href="#better-requirements-better-tasks" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">❌ Vague Requirements</label><label for="__tabbed_1_2">✅ Specific Requirements</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="gu">## Requirements</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">-</span><span class="w"> </span>Users should be able to interact with content
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">-</span><span class="w"> </span>The system should be fast
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">-</span><span class="w"> </span>Make it secure
+</span></code></pre></div>
+<p><strong>Result:</strong> Generic, non-actionable tasks</p>
+</div>
+<div class="tabbed-block">
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="gu">## Requirements</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">-</span><span class="w"> </span>Users can like posts with real-time counter updates
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">-</span><span class="w"> </span>Feed loads in &lt; 2 seconds for 1000+ posts
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">-</span><span class="w"> </span>All API endpoints require JWT authentication
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">-</span><span class="w"> </span>Rate limiting: 100 requests/minute per user
+</span></code></pre></div>
+<p><strong>Result:</strong> Detailed, implementation-ready tasks</p>
+</div>
+</div>
+</div>
+<h3 id="include-context-and-constraints"><strong>Include Context and Constraints</strong><a class="headerlink" href="#include-context-and-constraints" title="Permanent link">&para;</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="gu">## Technical Constraints</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">-</span><span class="w"> </span>Must integrate with existing PostgreSQL database
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">-</span><span class="w"> </span>Frontend uses React 18+ with TypeScript
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">-</span><span class="w"> </span>Backend API follows OpenAPI 3.0 specification
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">-</span><span class="w"> </span>All changes must maintain backward compatibility
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="k">-</span><span class="w"> </span>Performance budget: &lt; 200ms API response time
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="gu">## Business Constraints  </span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">-</span><span class="w"> </span>Feature must launch before Q2 deadline
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="k">-</span><span class="w"> </span>Budget allows for 40 development hours
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="k">-</span><span class="w"> </span>Must support 10,000 concurrent users
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="k">-</span><span class="w"> </span>Compliance with GDPR requirements
+</span></code></pre></div>
+<h3 id="effective-user-stories"><strong>Effective User Stories</strong><a class="headerlink" href="#effective-user-stories" title="Permanent link">&para;</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="gu">## User Stories</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="gu">### Primary Users (End Customers)</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="k">-</span><span class="w"> </span>As a shopper, I want to save items for later so I can purchase them when ready
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="k">-</span><span class="w"> </span>As a return customer, I want my cart to persist across devices
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="k">-</span><span class="w"> </span>As a mobile user, I want the cart to work seamlessly on my phone
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="gu">### Secondary Users (Business Stakeholders)</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="k">-</span><span class="w"> </span>As a product manager, I need cart abandonment analytics
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="k">-</span><span class="w"> </span>As a marketing team member, I want to send cart reminder emails
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="k">-</span><span class="w"> </span>As a customer service rep, I need to view customer cart contents
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="gu">### System Stories (Technical)</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="k">-</span><span class="w"> </span>As the system, I need to sync cart data across user sessions
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="k">-</span><span class="w"> </span>As the database, I need efficient queries for cart retrieval
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="k">-</span><span class="w"> </span>As the API, I need to handle concurrent cart modifications
+</span></code></pre></div>
+<hr />
+<h2 id="common-issues-and-solutions">🚨 <strong>Common Issues and Solutions</strong><a class="headerlink" href="#common-issues-and-solutions" title="Permanent link">&para;</a></h2>
+<h3 id="poor-task-generation"><strong>Poor Task Generation</strong><a class="headerlink" href="#poor-task-generation" title="Permanent link">&para;</a></h3>
+<details class="question">
+<summary>Tasks are too generic</summary>
+<p><strong>Problem:</strong> <abbr title="Product Requirement Document">PRD</abbr> lacks specific details</p>
+<p><strong>Solution:</strong>
+- Add technical constraints and requirements
+- Include specific metrics and performance criteria
+- Provide examples of desired behavior
+- Specify integration points with existing systems</p>
+</details>
+<details class="question">
+<summary>Missing dependencies</summary>
+<p><strong>Problem:</strong> Tasks seem disconnected</p>
+<p><strong>Solution:</strong>
+- Use <code>--codebase</code> flag to analyze existing code
+- Include system architecture in <abbr title="Product Requirement Document">PRD</abbr>
+- Specify data flow and component interactions
+- Add integration requirements</p>
+</details>
+<details class="question">
+<summary>Wrong technology assumptions</summary>
+<p><strong>Problem:</strong> Tasks suggest wrong frameworks</p>
+<p><strong>Solution:</strong>
+- Include current tech stack in <abbr title="Product Requirement Document">PRD</abbr>
+- Use <code>--codebase</code> analysis
+- Add technical constraints section
+- Specify required tools and frameworks</p>
+</details>
+<h3 id="processing-errors"><strong>Processing Errors</strong><a class="headerlink" href="#processing-errors" title="Permanent link">&para;</a></h3>
+<details class="question">
+<summary>Unable to parse <abbr title="Product Requirement Document">PRD</abbr></summary>
+<p><strong>Problem:</strong> File format or encoding issues</p>
+<p><strong>Solution:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Check file encoding</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>file<span class="w"> </span>social-feed.md
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Convert if needed</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>iconv<span class="w"> </span>-f<span class="w"> </span>ISO-8859-1<span class="w"> </span>-t<span class="w"> </span>UTF-8<span class="w"> </span>input.md<span class="w"> </span>&gt;<span class="w"> </span>output.md
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1"># Use verbose mode for debugging</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>marvin<span class="w"> </span>process<span class="w"> </span>input.md<span class="w"> </span>--verbose
+</span></code></pre></div></p>
+</details>
+<details class="question">
+<summary>Empty or minimal output</summary>
+<p><strong>Problem:</strong> <abbr title="Product Requirement Document">PRD</abbr> doesn't contain enough structured information</p>
+<p><strong>Solution:</strong>
+- Ensure <abbr title="Product Requirement Document">PRD</abbr> has clear headings and sections
+- Add more detailed requirements
+- Include acceptance criteria
+- Use markdown formatting for better parsing</p>
+</details>
+<hr />
+<h2 id="best-practices-summary">📚 <strong>Best Practices Summary</strong><a class="headerlink" href="#best-practices-summary" title="Permanent link">&para;</a></h2>
+<h3 id="do-this">✅ <strong>Do This</strong><a class="headerlink" href="#do-this" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use clear, descriptive headings</li>
+<li>Include specific, measurable requirements</li>
+<li>Add technical constraints and performance criteria</li>
+<li>Provide user stories for context</li>
+<li>Include acceptance criteria</li>
+<li>Use bullet points and lists for clarity</li>
+<li>Analyze your codebase with <code>--codebase</code> flag</li>
+</ul>
+<h3 id="avoid-this">❌ <strong>Avoid This</strong><a class="headerlink" href="#avoid-this" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Vague or generic requirements</li>
+<li>Missing technical details</li>
+<li>No acceptance criteria</li>
+<li>Unclear business context</li>
+<li>Mixing multiple features in one <abbr title="Product Requirement Document">PRD</abbr></li>
+<li>Inconsistent formatting</li>
+<li>Ignoring existing code architecture</li>
+</ul>
+<hr />
+<p><strong>Next:</strong> <a href="../templates/">Understanding Generated Templates →</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 28, 2025 18:25:26 UTC"><span class="timeago" datetime="2025-05-28T18:25:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 28, 2025 18:25:26 UTC">2025-05-28</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 28, 2025 18:25:26 UTC"><span class="timeago" datetime="2025-05-28T18:25:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 28, 2025 18:25:26 UTC">2025-05-28</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../getting-started/configuration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Configuration
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../templates/" class="md-footer__link md-footer__link--next" aria-label="Next: Understanding Templates">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Understanding Templates
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Marvin Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/moinsen-dev/marvin" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/marvin_tool" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+    
+  </body>
+</html>
