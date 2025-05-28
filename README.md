@@ -266,17 +266,26 @@ uv run python scripts/verify_quality.py
 
 ## 🗺️ Roadmap
 
-- [x] Core domain models
-- [x] Basic CLI interface
-- [x] FastAPI server
-- [ ] Complete PRD analysis with NLP
-- [ ] Advanced codebase scanning
-- [ ] Full XML template generation
-- [ ] MCP server implementation
-- [ ] Web UI dashboard
-- [ ] VS Code extension
+### ✅ v0.1.0 - Foundation (Complete)
+- [x] Core domain models with 100% test coverage
+- [x] Test-Driven Development infrastructure
+- [x] Basic CLI interface and FastAPI server
+- [x] CI/CD pipeline with quality gates
+- [x] GitHub integration and project tracking
 
-See our [Project Roadmap](docs/ROADMAP.md) for detailed plans.
+### 🚀 v0.2.0 - AI-Powered Analysis Platform (In Progress)
+**Target**: August 28, 2025 | **[View Milestone](https://github.com/moinsen-dev/marvin/milestone/1)**
+
+- [ ] Complete PRD analysis with NLP ([Epic #1](https://github.com/moinsen-dev/marvin/issues/1))
+- [ ] Advanced codebase scanning ([Epic #4](https://github.com/moinsen-dev/marvin/issues/4))
+- [ ] Full XML template generation ([Epic #6](https://github.com/moinsen-dev/marvin/issues/6))
+- [ ] MCP server implementation ([Epic #7](https://github.com/moinsen-dev/marvin/issues/7))
+- [ ] Web UI dashboard ([Epic #10](https://github.com/moinsen-dev/marvin/issues/10))
+- [ ] VS Code extension ([Epic #11](https://github.com/moinsen-dev/marvin/issues/11))
+
+**Total**: 11 Issues | 128 Story Points | 7 Epics
+
+See our [v0.2.0 Roadmap](docs/ROADMAP_v0.2.0.md) for detailed sprint planning and [GitHub Issues](https://github.com/moinsen-dev/marvin/issues) for tracking.
 
 ## 📄 License
 
