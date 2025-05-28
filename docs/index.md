@@ -442,6 +442,8 @@ Don't spend another day manually converting requirements into AI prompts. Join h
 
 **✨ Open source • ⚡ No vendor lock-in • 🆓 Always free**
 
+🎉 **Now live at:** https://moinsen-dev.github.io/marvin/
+
 </div>
 
 ---
