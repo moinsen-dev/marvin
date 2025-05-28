@@ -315,6 +315,245 @@ test: Add unit tests for DocumentAnalysisAgent markdown parsing
 - Test error handling for invalid files
 ```
 
+## 🐙 GitHub Integration & Tracking
+
+**MANDATORY**: Use GitHub for ALL project tracking, collaboration, and deployment.
+
+### 📊 Issue Tracking
+
+**Every task MUST have a corresponding GitHub issue:**
+
+```bash
+# Create issue via GitHub CLI
+gh issue create --title "Implement feature X" --body "Description..." --label "enhancement"
+
+# List open issues
+gh issue list --assignee @me
+
+# View issue details
+gh issue view <number>
+
+# Close issue with comment
+gh issue close <number> --comment "Completed in PR #123"
+```
+
+**Issue Templates:**
+- Bug Report: Use for defects and errors
+- Feature Request: Use for new functionality
+- Task: Use for implementation work
+- Documentation: Use for docs updates
+
+### 🔄 Pull Request Workflow
+
+**ALL changes MUST go through PR review:**
+
+```bash
+# Create feature branch
+git checkout -b feature/<issue-number>-<short-description>
+
+# Make changes following TDD workflow
+# ... implement with tests ...
+
+# Push branch
+git push -u origin feature/<issue-number>-<short-description>
+
+# Create PR linked to issue
+gh pr create --title "feat: <description>" --body "Closes #<issue-number>" --draft
+
+# After reviews, merge
+gh pr merge <number> --squash --delete-branch
+```
+
+**PR Requirements:**
+- ✅ All tests passing
+- ✅ Code quality checks passed
+- ✅ Linked to GitHub issue
+- ✅ Descriptive title and body
+- ✅ At least one approval
+- ✅ No merge conflicts
+
+### 🌿 Branch Strategy
+
+```
+main
+├── develop (default branch)
+│   ├── feature/<issue>-<description>
+│   ├── fix/<issue>-<description>
+│   └── docs/<issue>-<description>
+├── release/v<version>
+└── hotfix/<issue>-<description>
+```
+
+**Branch Rules:**
+- `main`: Production-ready code only
+- `develop`: Integration branch for features
+- `feature/*`: New functionality (from develop)
+- `fix/*`: Bug fixes (from develop)
+- `release/*`: Release preparation (from develop)
+- `hotfix/*`: Emergency fixes (from main)
+
+### 🏷️ Release Management
+
+```bash
+# Create release branch
+git checkout -b release/v0.2.0 develop
+
+# Update version
+uv run python scripts/bump_version.py --version 0.2.0
+
+# Create GitHub release
+gh release create v0.2.0 --title "Release v0.2.0" --notes-file CHANGELOG.md --target release/v0.2.0
+
+# Tag and merge to main
+git tag -a v0.2.0 -m "Release version 0.2.0"
+git checkout main
+git merge --no-ff release/v0.2.0
+git push origin main --tags
+```
+
+### 📋 Project Board Integration
+
+**Use GitHub Projects for sprint planning:**
+
+```bash
+# Add issue to project
+gh issue edit <number> --add-project "<project-name>"
+
+# Move issue between columns
+gh api graphql -f query='mutation ...'
+
+# View project status
+gh project list
+```
+
+**Project Columns:**
+- 📥 Backlog: All unplanned work
+- 📋 To Do: Sprint planned work
+- 🚧 In Progress: Active development
+- 👀 In Review: PR submitted
+- ✅ Done: Merged to develop
+
+### 🤖 GitHub Actions CI/CD
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv sync
+      - run: uv run pytest --cov
+      - run: uv run black src tests --check
+      - run: uv run isort src tests --check
+      - run: uv run ruff check src tests
+      - run: uv run mypy src
+```
+
+### 🔍 Code Review Guidelines
+
+**Reviewer Checklist:**
+- [ ] Tests cover new functionality
+- [ ] No decrease in code coverage
+- [ ] Follows project conventions
+- [ ] Documentation updated
+- [ ] No security vulnerabilities
+- [ ] Performance impact considered
+
+**Review Commands:**
+```bash
+# Checkout PR locally
+gh pr checkout <number>
+
+# Add review comment
+gh pr review <number> --comment --body "Looks good!"
+
+# Approve PR
+gh pr review <number> --approve
+
+# Request changes
+gh pr review <number> --request-changes --body "Please fix..."
+```
+
+### 📈 GitHub Insights & Metrics
+
+**Track project health:**
+```bash
+# View repository insights
+gh api repos/:owner/:repo/stats/contributors
+
+# Check workflow runs
+gh run list --workflow=ci.yml
+
+# View deployment status
+gh api repos/:owner/:repo/deployments
+```
+
+### 🔐 Security & Dependabot
+
+**Enable security features:**
+- Dependabot alerts for vulnerabilities
+- Dependabot updates for dependencies
+- Code scanning with CodeQL
+- Secret scanning
+
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "python"
+```
+
+### 📝 GitHub Integration Best Practices
+
+1. **Link Everything**: Every commit references an issue
+2. **Automate Workflows**: Use GitHub Actions extensively
+3. **Document Decisions**: Use issue/PR discussions
+4. **Track Progress**: Update issues with progress comments
+5. **Review Thoroughly**: Never merge without review
+6. **Tag Releases**: Use semantic versioning
+7. **Monitor Health**: Check Actions, coverage, dependencies
+
+### 🚀 Quick GitHub Commands
+
+```bash
+# Clone with GitHub CLI
+gh repo clone <owner>/<repo>
+
+# Fork repository
+gh repo fork <owner>/<repo> --clone
+
+# View repo in browser
+gh repo view --web
+
+# Check CI status
+gh run list --limit 5
+
+# View PR diff
+gh pr diff <number>
+
+# List milestones
+gh api repos/:owner/:repo/milestones
+
+# Create discussion
+gh api repos/:owner/:repo/discussions -f title="RFC: ..." -f body="..."
+```
+
 ## 🔧 VS Code Settings (Recommended)
 
 ```json

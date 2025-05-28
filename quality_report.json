@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-05-28T22:56:47+02:00",
+  "passed_checks": 0,
+  "total_checks": 8,
+  "success": false,
+  "results": {
+    "formatting": false,
+    "import_sorting": false,
+    "linting": false,
+    "type_checking": false,
+    "security": false,
+    "test_files": false
+  }
+}

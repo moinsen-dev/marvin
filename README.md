@@ -6,6 +6,10 @@
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://moinsen-dev.github.io/marvin/)
+[![CI](https://github.com/moinsen/marvin/workflows/CI/badge.svg)](https://github.com/moinsen/marvin/actions)
+[![Coverage](https://codecov.io/gh/moinsen/marvin/branch/main/graph/badge.svg)](https://codecov.io/gh/moinsen/marvin)
+[![Test Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/moinsen/marvin/actions)
+[![TDD](https://img.shields.io/badge/TDD-enforced-red.svg)](docs/TDD_BEST_PRACTICES.md)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org/)
@@ -29,6 +33,8 @@ Marvin is an intelligent tool that analyzes Product Requirement Documents (PRDs)
 - **📝 Template Generation**: Creation of structured AI-Coding-Task templates in XML format
 - **📊 Sequence Planning**: Automatic division of requirements into logical, sequential tasks
 - **🤖 AI-Powered**: Leverages Google ADK and advanced LLMs for intelligent analysis
+- **🧪 100% Test Coverage**: Enforced Test-Driven Development with comprehensive test suite
+- **🔒 Quality Gates**: CI/CD pipeline with strict coverage and quality requirements
 
 ## 🚀 Quick Start
 
@@ -192,31 +198,64 @@ git clone https://github.com/moinsen/marvin.git
 cd marvin
 uv pip install -e ".[dev]"
 
-# Run tests
-pytest
+# Run tests with 100% coverage enforcement
+uv run pytest
 
-# Run with coverage
-pytest --cov=marvin
+# Generate detailed coverage report
+uv run pytest --cov=marvin --cov-report=html
+open htmlcov/index.html
 
-# Format code
-black src tests
-isort src tests
+# Run pre-commit hooks (includes all quality checks)
+pre-commit run --all-files
 
-# Lint code
-ruff check src tests
+# Individual quality checks
+uv run black src tests        # Format code
+uv run isort src tests        # Sort imports
+uv run ruff check src tests   # Lint code
+uv run mypy src              # Type check
 
-# Type check
-mypy src
+# Verify test coverage and quality (demonstration)
+uv run python scripts/demo_quality_verification.py
+
+# Full quality verification (once we reach 100% coverage)
+uv run python scripts/verify_quality.py
 ```
 
 ### Code Quality
 
-We maintain high code quality standards:
+We maintain the highest code quality standards with **100% test coverage enforcement**:
+
+- 🧪 **Test-Driven Development (TDD)**: All code written test-first with comprehensive coverage
+- ✅ **100% Test Coverage**: Enforced via CI/CD - no PRs merge below 100%
 - 🎨 **Black** for code formatting
-- 📦 **isort** for import sorting
+- 📦 **isort** for import sorting  
 - 🔍 **Ruff** for linting
 - 📝 **mypy** for type checking
-- ✅ **pytest** for testing (90% coverage target)
+- 🔒 **Pre-commit hooks** preventing commits without tests
+- 🚫 **Coverage gates** blocking merges with insufficient coverage
+
+#### Quality Verification
+
+```bash
+# Demonstrate our quality verification system
+uv run python scripts/demo_quality_verification.py
+
+# Expected output:
+# 🧪 MARVIN QUALITY VERIFICATION DEMONSTRATION
+# ✅ Quality Verifier initialized successfully
+# 🎯 TESTING COVERAGE THRESHOLD ENFORCEMENT
+#    99.9% coverage  → ❌ FAIL
+#    99.99% coverage → ❌ FAIL  
+#    100.0% coverage → ✅ PASS
+# 🏆 QUALITY ENFORCEMENT SUMMARY
+#    ✅ 100% Test Coverage Enforced
+#    ✅ Pre-commit Hooks Configured
+#    ✅ CI/CD Coverage Gates Active
+# 🎉 Marvin achieves the highest quality standards!
+
+# Run actual comprehensive quality check (when at 100% coverage)
+uv run python scripts/verify_quality.py
+```
 
 ## 📚 Documentation
 

@@ -125,7 +125,7 @@ addopts = [
     "--cov=marvin",
     "--cov-branch",
     "--cov-report=term-missing:skip-covered",
-    "--cov-fail-under=0",  # Will increase as we add tests
+    "--cov-fail-under=100",  # Enforce 100% test coverage
 ]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
@@ -140,14 +140,24 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["src"]
+branch = true
+source = ["src/marvin"]
 omit = [
     "*/tests/*",
     "*/test_*",
     "*/__main__.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/site-packages/*",
+    "*/.tox/*",
+    "*/migrations/*",
 ]
 
 [tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+fail_under = 100
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
@@ -155,4 +165,10 @@ exclude_lines = [
     "raise AssertionError",
     "raise NotImplementedError",
     "if TYPE_CHECKING:",
+    "if 0:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
 ]
+
+[tool.coverage.html]
+directory = "htmlcov"

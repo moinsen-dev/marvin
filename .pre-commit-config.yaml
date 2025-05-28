@@ -1,0 +1,113 @@
+repos:
+  # Standard hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: debug-statements
+
+  # Python formatting
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      - id: black
+        language_version: python3.11
+        args: ['--line-length=100']
+
+  # Import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ['--profile=black', '--line-length=100']
+
+  # Linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.2.0
+    hooks:
+      - id: ruff
+        args: ['--fix']
+
+  # Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-all]
+        args: ['--ignore-missing-imports']
+
+  # Security scanning
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        args: ['-r', 'src/', '-ll']
+        exclude: tests/
+
+  # TDD enforcement - CUSTOM HOOKS
+  - repo: local
+    hooks:
+      # Ensure tests exist for new Python files
+      - id: check-test-exists
+        name: Check test exists for new code
+        entry: python scripts/check_test_exists.py
+        language: python
+        files: '^src/.*\.py$'
+        exclude: '^src/.*/__init__\.py$'
+        pass_filenames: true
+
+      # Run tests before commit (with coverage)
+      - id: test-coverage
+        name: Run tests with coverage check
+        entry: bash -c 'uv run pytest --cov=marvin --cov-fail-under=100 -x || (echo "❌ Tests failed or coverage below 100%!" && exit 1)'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+
+      # Prevent committing without tests
+      - id: no-commit-without-tests
+        name: Block commits without tests
+        entry: bash -c 'if git diff --cached --name-only | grep -E "^src/.*\.py$" | grep -v "__init__\.py"; then echo "⚠️  Remember: Write tests FIRST (TDD)!"; fi'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      # Check for TODO/FIXME in tests
+      - id: no-todos-in-tests
+        name: No TODOs in test files
+        entry: bash -c 'git diff --cached --name-only | grep -E "^tests/.*\.py$" | xargs grep -E "TODO|FIXME" && echo "❌ Remove TODOs from tests!" && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+
+# Configuration
+default_language_version:
+  python: python3.11
+
+default_stages: [commit, push]
+
+fail_fast: false
+
+# Exclude patterns
+exclude: |
+  (?x)(
+    ^docs/|
+    ^examples/|
+    ^scripts/|
+    ^\.github/|
+    ^\.vscode/|
+    ^htmlcov/|
+    ^site/|
+    ^dist/|
+    \.egg-info|
+    __pycache__|
+    \.pyc$|
+    \.pyo$
+  )
