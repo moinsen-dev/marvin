@@ -1,15 +1,25 @@
 [project]
-name = "marvin"
+name = "marvin-prd"
 version = "0.1.0"
 description = "An intelligent tool for converting PRDs into structured AI-Coding-Tasks"
-authors = [{ name = "Your Name", email = "your.email@example.com" }]
+authors = [{ name = "Moinsen Dev Team", email = "hello@moinsen.dev" }]
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+keywords = ["prd", "ai", "coding", "assistant", "template", "generator", "cursor", "windsurf", "claude"]
 classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Text Processing :: Markup :: XML",
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Framework :: FastAPI",
+    "Natural Language :: English",
 ]
 dependencies = [
     "fastapi>=0.115.12",
@@ -27,6 +37,13 @@ dependencies = [
     "types-pyyaml>=6.0.12.20250402",
     "networkx>=3.4.2",
 ]
+
+[project.urls]
+Homepage = "https://moinsen-dev.github.io/marvin/"
+Documentation = "https://moinsen-dev.github.io/marvin/"
+Repository = "https://github.com/moinsen-dev/marvin"
+Issues = "https://github.com/moinsen-dev/marvin/issues"
+Changelog = "https://github.com/moinsen-dev/marvin/blob/develop/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [

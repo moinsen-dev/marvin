@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🚨🚨🚨 CRITICAL REMINDER - READ THIS FIRST! 🚨🚨🚨
+
+**ALWAYS USE `uv` FOR ALL PYTHON OPERATIONS - NEVER USE `python` OR `pip` DIRECTLY!**
+
+- ✅ `uv run python script.py` - NOT `python script.py`
+- ✅ `uv pip install package` - NOT `pip install package`  
+- ✅ `uv run pytest` - NOT `pytest`
+- ✅ `uv run black src` - NOT `black src`
+- ✅ `uv run python -m build` - NOT `python -m build`
+
+**THIS IS NON-NEGOTIABLE - UV IS OUR PACKAGE MANAGER!**
+
 ## Project Overview
 
 Marvin is an intelligent tool that analyzes Product Requirement Documents (PRDs) and converts them into structured AI-Coding-Tasks. It generates XML-based task templates for AI coding assistants (Cursor, Windsurf, Claude Code).
@@ -56,9 +68,40 @@ uv run mypy src || exit 1
 echo "✅ Code quality checks passed!"
 ```
 
-## 📦 Package Management with uv
+## 🚨🚨🚨 CRITICAL: ALWAYS USE UV - NEVER USE PYTHON OR PIP DIRECTLY! 🚨🚨🚨
 
-**ALWAYS use `uv` - NEVER use pip directly!**
+**THIS IS ABSOLUTELY CRITICAL - FAILURE TO USE UV WILL CAUSE ISSUES!**
+
+### ⚠️ NEVER DO THIS:
+```bash
+# ❌ WRONG - DO NOT USE:
+python script.py          # ❌ NO!
+pip install package       # ❌ NO!
+python -m build          # ❌ NO!
+pytest                   # ❌ NO!
+black src                # ❌ NO!
+```
+
+### ✅ ALWAYS DO THIS:
+```bash
+# ✅ CORRECT - ALWAYS USE UV:
+uv run python script.py   # ✅ YES!
+uv pip install package    # ✅ YES!
+uv run python -m build    # ✅ YES!
+uv run pytest            # ✅ YES!
+uv run black src         # ✅ YES!
+```
+
+## 📦 What is UV?
+
+**UV is an extremely fast Python package and project manager, written in Rust by Astral.**
+
+- **10-100x faster** than pip
+- **All-in-one solution**: Replaces pip, pip-tools, pipx, poetry, pyenv, virtualenv
+- **Automatic virtual environment management**
+- **Built-in Python version management**
+- **Smart caching and parallelization**
+- **Drop-in replacement** for pip commands
 
 ### Essential uv Commands
 

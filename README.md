@@ -2,8 +2,10 @@
 
 <div align="center">
 
+[![PyPI version](https://badge.fury.io/py/marvin-prd.svg)](https://pypi.org/project/marvin-prd/)
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://moinsen-dev.github.io/marvin/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org/)
@@ -69,11 +71,21 @@ marvin --help
 - uv (recommended) or pip
 - Git
 
+### From PyPI (Recommended)
+
+```bash
+# Install with pip
+pip install marvin-prd
+
+# Or install with uv (faster)
+uv pip install marvin-prd
+```
+
 ### From Source
 
 ```bash
 # Clone the repository
-git clone https://github.com/moinsen/marvin.git
+git clone https://github.com/moinsen-dev/marvin.git
 cd marvin
 
 # Install with uv (recommended)
