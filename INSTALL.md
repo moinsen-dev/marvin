@@ -13,7 +13,7 @@ This guide describes how to install Marvin locally and start development.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/marvin.git
+git clone https://github.com/moinsen-dev/marvin.git
 cd marvin
 ```
 
