@@ -102,22 +102,36 @@ def main(args: list[str] | None = None) -> int:
         if parsed_args.codebase:
             print(f"Using codebase: {parsed_args.codebase}")
 
-        result = process_prd(parsed_args.prd_file, parsed_args.codebase)
+        result = process_prd(
+            parsed_args.prd_file,
+            parsed_args.codebase,
+            parsed_args.output
+        )
 
         if result["status"] == "success":
             # Print results
-            print("\nResults:")
-            for i, r in enumerate(result["results"]):
-                print(f"\n=== Result {i + 1} ===")
-                print(r)
-
-            # Save results if output directory specified
-            if parsed_args.output:
-                save_results(result["results"], parsed_args.output)
+            print("\n✅ Processing completed successfully!")
+            print(f"   - Features analyzed: {result.get('features_analyzed', 0)}")
+            print(f"   - Tasks generated: {result.get('tasks_generated', 0)}")
+            print(f"   - Templates created: {result.get('templates_created', 0)}")
+            print(f"   - Processing time: {result.get('processing_time', 0):.2f}s")
+            
+            if result.get('insights'):
+                print("\n📊 Insights:")
+                for insight in result['insights']:
+                    print(f"   • {insight}")
+            
+            if result.get('warnings'):
+                print("\n⚠️  Warnings:")
+                for warning in result['warnings']:
+                    print(f"   • {warning}")
+            
+            if result.get('output_directory'):
+                print(f"\n📁 Results saved to: {result['output_directory']}")
 
             return 0
         else:
-            print(f"Error: {result.get('error_message', 'Unknown error')}")
+            print(f"❌ Error: {result.get('error_message', 'Unknown error')}")
             return 1
 
     elif parsed_args.command == "server":

@@ -1,109 +1,120 @@
 """
-Main Marvin Agent.
+Main Marvin orchestrator using the new domain-driven architecture.
 
-This agent orchestrates the entire Marvin workflow, coordinating the PRD analysis,
-codebase scanning, template generation, and sequence planning agents to convert
-PRD documents into AI-Coding-Task templates.
+This replaces the ADK-based agent with a proper domain service orchestration.
 """
 
 import asyncio
 import os
+from pathlib import Path
+from typing import Optional
 
-from google.adk.agents import Agent
-from google.adk.tools import agent_tool
-from google.genai.types import Content, Part
-
-from marvin.agents.base import MODEL_GEMINI_2_0_PRO, create_runner
-from marvin.agents.codebase_scanner import codebase_scanner_agent
-from marvin.agents.prd_analysis import prd_analysis_agent
-from marvin.agents.sequence_planner import sequence_planner_agent
-from marvin.agents.template_generator import template_generator_agent
-
-# Create the main agent using AgentTool to delegate to specialized agents
-main_agent = Agent(
-    name="marvin_main_agent",
-    model=MODEL_GEMINI_2_0_PRO,
-    description="Orchestrates the conversion of PRD documents into AI-Coding-Task templates",
-    instruction="""You are Marvin, an intelligent agent for converting Product Requirements Documents (PRDs)
-into structured AI-Coding-Tasks. Named after the paranoid-depressive robot from "The Hitchhiker's Guide to the Galaxy,"
-you help developers organize their projects and effectively use AI coding assistants.
-
-Your capabilities include:
-1. Analyzing PRD documents to extract features and requirements
-2. Scanning codebases to understand project structure and technologies
-3. Generating XML task templates for AI coding assistants
-4. Planning optimal implementation sequences based on dependencies
-
-When a user provides a PRD document and/or codebase location, coordinate the specialized agents
-to process the inputs and generate useful task templates. Present the results clearly to the user.
-
-Use the PRD Analysis Agent for extracting information from PRDs.
-Use the Codebase Scanner Agent for understanding existing projects.
-Use the Template Generator Agent for creating XML templates.
-Use the Sequence Planner Agent for arranging tasks in optimal order.""",
-    tools=[
-        agent_tool.AgentTool(agent=prd_analysis_agent),
-        agent_tool.AgentTool(agent=codebase_scanner_agent),
-        agent_tool.AgentTool(agent=template_generator_agent),
-        agent_tool.AgentTool(agent=sequence_planner_agent),
-    ],
+from marvin.core.application import ProcessPRDUseCase
+from marvin.core.domain.services import (
+    CodebaseScanner,
+    PRDAnalyzer,
+    TaskSequencer,
+    TemplateGenerator,
 )
-
-# Create a runner for the main agent
-main_agent_runner = create_runner(main_agent)
+from marvin.infrastructure.ai import GeminiClient
 
 
-async def process_prd_async(prd_path: str, codebase_path: str = None) -> dict:
+async def process_prd_async(
+    prd_path: str,
+    codebase_path: Optional[str] = None,
+    output_dir: Optional[str] = None,
+) -> dict:
     """
-    Process a PRD file asynchronously using the main Marvin agent.
+    Process a PRD file asynchronously using the new architecture.
 
     Args:
         prd_path: Path to the PRD file
         codebase_path: Optional path to the codebase directory
+        output_dir: Optional output directory for results
 
     Returns:
         Dict containing the processing results
     """
     # Validate inputs
-    if not os.path.exists(prd_path):
+    prd_file = Path(prd_path)
+    if not prd_file.exists():
         return {"status": "error", "error_message": f"PRD file not found: {prd_path}"}
 
-    if codebase_path and not os.path.isdir(codebase_path):
+    codebase_dir = None
+    if codebase_path:
+        codebase_dir = Path(codebase_path)
+        if not codebase_dir.is_dir():
+            return {
+                "status": "error",
+                "error_message": f"Codebase directory not found: {codebase_path}",
+            }
+
+    output_path = Path(output_dir) if output_dir else None
+
+    try:
+        # Initialize infrastructure
+        ai_client = GeminiClient()
+        
+        # Initialize domain services
+        prd_analyzer = PRDAnalyzer()
+        codebase_scanner = CodebaseScanner()
+        task_sequencer = TaskSequencer()
+        template_generator = TemplateGenerator()
+        
+        # Create use case
+        use_case = ProcessPRDUseCase(
+            prd_analyzer=prd_analyzer,
+            codebase_scanner=codebase_scanner,
+            task_sequencer=task_sequencer,
+            template_generator=template_generator,
+            ai_service=ai_client,
+        )
+        
+        # Execute the use case
+        result = await use_case.execute(
+            prd_path=prd_file,
+            codebase_path=codebase_dir,
+            output_dir=output_path,
+        )
+        
+        # Format results
+        return {
+            "status": "success",
+            "features_analyzed": len(result.context.prd_document.features),
+            "tasks_generated": len(result.task_sequence.tasks),
+            "templates_created": len(result.generated_templates),
+            "insights": result.insights,
+            "warnings": result.warnings,
+            "processing_time": result.processing_time_seconds,
+            "output_directory": str(output_path) if output_path else None,
+        }
+        
+    except Exception as e:
         return {
             "status": "error",
-            "error_message": f"Codebase directory not found: {codebase_path}",
+            "error_message": f"Processing failed: {str(e)}",
         }
 
-    # Create the message for the agent
-    message_text = f"Please analyze the PRD at {prd_path}"
-    if codebase_path:
-        message_text += f" and consider the codebase at {codebase_path}"
-    message_text += " to generate AI coding task templates."
 
-    message = Content(role="user", parts=[Part(text=message_text)])
-
-    # Run the agent and collect the events
-    results = []
-    async for event in main_agent_runner.run_async(
-        user_id="marvin_user", session_id="main_agent_session", new_message=message
-    ):
-        # Store all event information for analysis
-        if event.content and event.content.parts:
-            results.append(event.content.parts[0].text)
-
-    # Return the final results
-    return {"status": "success", "results": results}
-
-
-def process_prd(prd_path: str, codebase_path: str = None) -> dict:
+def process_prd(
+    prd_path: str,
+    codebase_path: Optional[str] = None,
+    output_dir: Optional[str] = None,
+) -> dict:
     """
     Synchronous wrapper for process_prd_async.
 
     Args:
         prd_path: Path to the PRD file
         codebase_path: Optional path to the codebase directory
+        output_dir: Optional output directory for results
 
     Returns:
         Dict containing the processing results
     """
-    return asyncio.run(process_prd_async(prd_path, codebase_path))
+    return asyncio.run(process_prd_async(prd_path, codebase_path, output_dir))
+
+
+# For backward compatibility
+main_agent = None  # No longer using ADK agents
+main_agent_runner = None  # No longer using ADK runners
