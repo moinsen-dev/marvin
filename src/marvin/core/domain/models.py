@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from enum import Enum
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -17,18 +18,45 @@ class FeatureStatus(str, Enum):
     REJECTED = "rejected"
 
 
+class UserStory(BaseModel):
+    """A user story for a feature."""
+
+    story: str
+    format: str = "as_a_user"  # as_a_user, given_when_then, job_story, simple
+    actor: str | None = None
+    action: str | None = None
+    benefit: str | None = None
+
+
 class Feature(BaseModel):
     """A feature from a PRD."""
 
     id: str
-    name: str
+    title: str  # Changed from name to title for consistency
     description: str
     requirements: list[str] = Field(default_factory=list)
     dependencies: list[str] = Field(default_factory=list)
     status: FeatureStatus = FeatureStatus.PROPOSED
-    priority: int = 0
-    estimated_effort: str | None = None
+    priority: int = 1  # 0=High, 1=Medium, 2=Low (restored for backward compatibility)
+    effort: str | None = None  # Changed from estimated_effort
     tags: list[str] = Field(default_factory=list)
+    user_stories: list[UserStory] = Field(default_factory=list)
+    acceptance_criteria: list[str] = Field(default_factory=list)
+    definition_of_done: list[str] = Field(default_factory=list)
+
+    def is_valid(self) -> bool:
+        """Validate feature data."""
+        return (
+            bool(self.title) and
+            bool(self.description) and
+            isinstance(self.priority, int) and 0 <= self.priority <= 2 and
+            self.status in [status.value for status in FeatureStatus]
+        )
+
+    @property
+    def name(self) -> str:
+        """Backward compatibility property."""
+        return self.title
 
 
 class PRD(BaseModel):
@@ -43,11 +71,22 @@ class PRD(BaseModel):
     version: str
     features: list[Feature] = Field(default_factory=list)
     tags: list[str] = Field(default_factory=list)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    dependency_graph: dict[str, list[str]] = Field(default_factory=dict)
 
     def add_feature(self, feature: Feature) -> None:
         """Adds a feature to the PRD."""
         self.features.append(feature)
         self.updated_at = datetime.now()
+
+    def is_valid(self) -> bool:
+        """Validate PRD data."""
+        return (
+            bool(self.title) and
+            bool(self.author) and
+            bool(self.version) and
+            self.created_at is not None
+        )
 
 
 class Component(BaseModel):
